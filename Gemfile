@@ -32,7 +32,9 @@ gem 'jbuilder', '~> 2.5'
 ##Added
 gem 'bootstrap-sass'
 gem 'devise'
-
+gem 'phantomjs'
+gem 'webshot', '~> 0.0.11'
+gem "paperclip", git: "git://github.com/thoughtbot/paperclip.git"
 
 
 
@@ -40,6 +42,9 @@ gem 'devise'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
+
+  ##Added
+  gem 'rspec-rails'
 end
 
 group :development do
