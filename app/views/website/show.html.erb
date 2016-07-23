@@ -1,2 +1,5 @@
-<h1><%= @website.name %></h1>
-<%= image_tag @website.avatar.url(:medium) %>
+
+<% @websites.each do |website| %>
+<%= website.name %>
+<%= image_tag website.avatar.url(:medium) %>
+<% end %>

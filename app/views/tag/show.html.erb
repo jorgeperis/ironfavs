@@ -1,0 +1,7 @@
+<h1>My tags</h1>
+
+<% @tags.each do |tag| %>
+  <div class="" style="background-color:<%= tag.color.hex %>" >
+    <h3><%= tag.name %> </h3>
+  </div>
+<% end %>

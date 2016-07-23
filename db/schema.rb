@@ -10,13 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160723063528) do
+ActiveRecord::Schema.define(version: 20160723165109) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "colors", force: :cascade do |t|
-    t.string   "color"
+    t.string   "hex"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -43,7 +43,8 @@ ActiveRecord::Schema.define(version: 20160723063528) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string   "color"
+    t.integer  "color_id"
+    t.index ["color_id"], name: "index_tags_on_color_id", using: :btree
   end
 
   create_table "user_websites", force: :cascade do |t|

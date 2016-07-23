@@ -8,16 +8,11 @@
 mechanize = Mechanize.new
 ws = Webshot::Screenshot.instance
 
-urls = ["http://www.ironhack.com/",
-        "http://www.meneame.net/",
-        "http://www.xataka.com/",
-        "http://www.mibrujula.com/",
+urls = ["http://www.meneame.net/",
         "http://www.genbetadev.com/",
         "https://www.codecademy.com/",
         "http://stackoverflow.com/",
-        "http://www.jorgeperis.es/",
-        "http://www.marca.es/",
-        "http://www.kakaomedia.com/"]
+        "http://www.jorgeperis.es/",]
 
 urls.each do |url|
   webshot = ws.capture url, "image.png", width: 300, height: 300, quality: 85
@@ -25,10 +20,8 @@ urls.each do |url|
   Website.create(url: url,name: page.title,:avatar => File.new(webshot.path, "r"))
 end
 
-Tag.create(name: "Code", color: "#ppp")
-
-colors = ['#113F8C', '#01A4A4', '#00A1CB', '#61AE24', '#D0D102',
-          '#32742C', '#D70060', '#E54028', '#F18D05', '#616161']
+colors = ['#8eb2f1', '#80fefe', '#80e5ff', '#bbe995', '#fefe81',
+          '#a7dca3', '#ff80b9', '#f19b8e', '#fcc982', '#bfbfbf']
 colors.each do |color|
-  Color.create color: color
+  Color.create(hex: color)
 end

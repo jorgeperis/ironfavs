@@ -6,4 +6,8 @@ get '/', to: 'prueba#index'
 get '/show', to: 'prueba#show'
 get '/website/new', to: 'website#new'
 post '/websites', to: 'website#create'
+get '/tag/new', to: 'tag#new'
+post '/tags', to: 'tag#create'
+get '/tags', to: 'tag#show'
+get '/websites/show', to: 'website#show'
 end
