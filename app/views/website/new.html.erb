@@ -1,0 +1,8 @@
+<h1>Add a website</h1>
+
+<%= form_for Website.new do |f| %>
+  <%= f.label :url %>
+  <%= f.text_field :url %>
+
+  <%= f.button 'Save Website'%>
+<% end %>

@@ -35,6 +35,7 @@ gem 'devise'
 gem 'phantomjs'
 gem 'webshot', '~> 0.0.11'
 gem "paperclip", git: "git://github.com/thoughtbot/paperclip.git"
+gem 'mechanize'
 
 
 
