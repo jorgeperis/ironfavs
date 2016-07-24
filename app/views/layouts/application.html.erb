@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Mytopeight</title>
+    <title>My Top 8</title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -11,6 +11,20 @@
   <body>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
-    <%= yield %>
+    <div class="container-fluid">
+      <div class="row">
+      </div>
+      <div class="row">
+        <div class="col-sm-2">
+        </div>
+        <div class="col-sm-8">
+          <%= yield %>
+        </div>
+        <div class="col-sm-2">
+          <%= @tags = current_user.tags
+              render :template => 'tag/show' %>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

@@ -1,5 +1,22 @@
 
+
+
+
 <% @websites.each do |website| %>
-<%= website.name %>
-<%= image_tag website.avatar.url(:medium) %>
+<div class="website">
+  <div class="website_individual">
+    <% if website.name.length > 15 %>
+    <% website.name = website.name[0..12] + "..." %>
+    <% end %>
+    <%= website.name %>
+    <%= image_tag website.avatar.url(:medium) %>
+    <div class="tagscontainer">
+      <% website.tags.each do |tag| %>
+      <div class="color<%= tag.color.id %> tags size0" >
+        <%= tag.name %>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>
 <% end %>
