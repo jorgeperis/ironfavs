@@ -2,6 +2,11 @@ class TagController < ApplicationController
 
   def show
     @tags = current_user.tags.all
+    bigTag = current_user.tags.sort { |x,y| y.websites.length <=> x.websites.length }
+    max = bigTag.first.websites.length
+    @tags.each do |tag|
+    Tag.change_tag_size(current_user,tag,max)
+    end
   end
 
   def new
