@@ -9,24 +9,17 @@ class WebsiteController < ApplicationController
 
     url = params[:website][:url]
     url = "http://#{url}" unless url=~/^https?:\/\//
-    website = Website.find_by url: url
 
-    if website
-      if website.users.find_by id: current_user.id
-        a = "Website exists in your Websites list"
+    begin
+      page = mechanize.get(url)
+
+      if current_user.websites.find_by url: page.uri.to_s
+        a = "Page already exists in your database"
         render text: a
       else
-        current_user.websites.push(website)
-        redirect_to '/websites/show'
-      end
-    else
-      begin
-        Net::HTTP.get(URI(url))
-        page = mechanize.get(url)
-        @website = Website.new(url: url,name: page.title)
-
+        @website = Website.new(url: page.uri.to_s,name: page.title)
         if @website.save
-          webshot = ws.capture url, "image.png", width: 300, height: 300, quality: 85
+          webshot = ws.capture page.uri.to_s, "image.png", width: 300, height: 300, quality: 85
           @website.avatar = File.new(webshot.path, "r")
           @website.save
           current_user.websites.push(@website)
@@ -34,13 +27,11 @@ class WebsiteController < ApplicationController
         else
           render text: @website.errors[:url]
         end
-
-      rescue => e
-        render text: e
       end
 
+    rescue => e
+      render text: e
     end
-
   end
 
   def show

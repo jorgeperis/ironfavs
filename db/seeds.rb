@@ -17,11 +17,11 @@ urls = ["http://www.meneame.net/",
 urls.each do |url|
   webshot = ws.capture url, "image.png", width: 300, height: 300, quality: 85
   page = mechanize.get(url)
-  Website.create(url: url,name: page.title,:avatar => File.new(webshot.path, "r"))
+  Website.create(url: page.uri.to_s,name: page.title,:avatar => File.new(webshot.path, "r"))
 end
 
-colors = ['#8eb2f1', '#80fefe', '#80e5ff', '#bbe995', '#fefe81',
-          '#a7dca3', '#ff80b9', '#f19b8e', '#fcc982', '#bfbfbf']
+colors = ['#c9c9b6', '#ff8080', '#ffbf80', '#ffff80', '#9fff80', '#80dfff', '#8080ff', '#ff80ff'] 
+
 colors.each do |color|
   Color.create(hex: color)
 end

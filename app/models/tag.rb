@@ -6,5 +6,5 @@ class Tag < ApplicationRecord
   has_many :users, through: :tag_users
 
   belongs_to :color
-  validates :name, :presence => true, :uniqueness => true
+  validates :name, :presence => true
 end
