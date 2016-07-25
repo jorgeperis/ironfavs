@@ -15,3 +15,28 @@
 //= require turbolinks
 //= require_tree .
 //= require bootstrap-sprockets
+
+$(function(){
+var CreateTag = function(){
+  $('.js-create-tag').modal('show');
+}
+var CreateWebsite = function(){
+  $('.js-create-website').modal('show');
+}
+
+
+
+$('.newTag').on('click', CreateTag);
+$('.newWebsite').on('click', CreateWebsite);
+$('.submitTag').on('click', function(){
+  $('.js-create-tag').modal('hide');
+})
+
+
+
+
+
+})
+
+
+// $('.js-more-results').modal('show');

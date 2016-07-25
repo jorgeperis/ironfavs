@@ -9,10 +9,23 @@
   </head>
 
   <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
     <div class="container-fluid">
       <div class="row">
+        <div class="col-sm-3 logo">
+          My Top 8
+        </div>
+        <div class="col-sm-9">
+          <p class="notice"><%= notice %></p>
+          <p class="alert"><%= alert %></p>
+          <form class="navbar-form navbar-left" role="search">
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Search">
+            </div>
+            <button type="submit" class="btn btn-default">Submit</button>
+          </form>
+          <button type="button" class="btn btn-default newTag">New Tag</button>
+          <button type="button" class="btn btn-default newWebsite">New Website</button>
+        </div>
       </div>
       <div class="row">
         <div class="col-sm-2">
@@ -21,10 +34,54 @@
           <%= yield %>
         </div>
         <div class="col-sm-2">
-          <%= @tags = current_user.tags
-              render :template => 'tag/show' %>
+          <% @tags.each do |tag| %>
+            <% thisTag = tag.decorate %>
+            <div class="tags tag-color-<%= tag.color.name %> size<%= thisTag.createSize(@maxLength) %>" data-tag="<%= tag.id %>">
+            <%= tag.name %>
+            </div>
+          <% end %>
         </div>
       </div>
     </div>
+    <div class="modal fade js-create-tag">
+    		  <div class="modal-dialog">
+    		    <div class="modal-content" style="overflow: auto;">
+    		      <div class="modal-header">
+    		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    		          <span>&times;</span>
+    		        </button>
+    		        <h2 class="js-artist-name">Create a new Tag</h2>
+    		      </div>
+    		      <div class="modal-body">
+                <%= form_for Tag.new do |f| %>
+                  <%= f.label :name %>
+                  <%= f.text_field :name %>
+
+                  <%= f.button 'Save Tag', class: 'submitTag'%>
+                <% end %>
+    		      </div>
+    		    </div>
+    		  </div>
+    		</div>
+        <div class="modal fade js-create-website">
+        		  <div class="modal-dialog">
+        		    <div class="modal-content" style="overflow: auto;">
+        		      <div class="modal-header">
+        		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        		          <span>&times;</span>
+        		        </button>
+        		        <h2 class="js-artist-name">Create a new Website</h2>
+        		      </div>
+        		      <div class="modal-body">
+                    <%= form_for Website.new do |f| %>
+                      <%= f.label :url %>
+                      <%= f.text_field :url %>
+
+                      <%= f.button 'Save Website', class: 'submitWebsite'%>
+                    <% end %>
+        		      </div>
+        		    </div>
+        		  </div>
+        		</div>
   </body>
 </html>

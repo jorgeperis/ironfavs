@@ -1,0 +1,8 @@
+<h1>My tags</h1>
+
+<% @tags.each do |tag| %>
+  <% thisTag = tag.decorate %>
+  <div class="tags tag-color-<%= tag.color.name %> size<%= thisTag.createSize(@maxLength) %>">
+  <%= tag.name %>
+  </div>
+<% end %>

@@ -1,0 +1,8 @@
+<h1>Add a tag</h1>
+
+<%= form_for Tag.new do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+
+  <%= f.button 'Save Tag'%>
+<% end %>

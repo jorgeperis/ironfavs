@@ -1,4 +1,4 @@
 class Color < ApplicationRecord
-  validates :hex, :presence => true, :uniqueness => true
+  validates :name, :presence => true, :uniqueness => true
   has_many :tags
 end

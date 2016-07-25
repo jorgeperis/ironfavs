@@ -8,15 +8,40 @@ class Tag < ApplicationRecord
   belongs_to :color
   validates :name, :presence => true
 
-  def self.change_tag_size(current_user,tag,max)
-    case tag.websites.length
-      when 0...(0.2*max) then tag.size = 1
-      when (0.2*max)...(0.4*max) then tag.size = 2
-      when (0.4*max)...(0.6*max) then tag.size = 3
-      when (0.6*max)...(0.8*max) then tag.size = 4
-    else tag.size = 5
+
+ def insertColor(userTags)
+    if userTags.all.empty?
+      color = Color.first
+    else
+      if Color.exists? id: userTags.last.color.id + 1
+        color = Color.find(userTags.last.color.id + 1)
+      else
+        color = Color.first
+      end
     end
-    tag.save
+    self.color = color
   end
 
+  def uniqueTag(userTags)
+    if userTags.find_by('lower(name) = ?', self.name.downcase)
+      "The name already exists"
+    else
+      self.insertColor(userTags)
+      if self.save
+        userTags.push(self)
+        return "Done"
+      else
+        self.errors.full_messages
+      end
+    end
+  end
+
+  def self.biggerTag(userTags)
+    biggestTag = userTags.sort { |x,y| y.websites.length <=> x.websites.length }.first
+    if biggestTag
+      biggestTag.websites.length
+    else
+      0
+    end
+  end
 end
