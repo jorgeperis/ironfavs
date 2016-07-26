@@ -34,11 +34,14 @@
           <%= yield %>
         </div>
         <div class="col-sm-2">
-          <% @tags.each do |tag| %>
-            <% thisTag = tag.decorate %>
-            <div class="tags tag-color-<%= tag.color.name %> size<%= thisTag.createSize(@maxLength) %>" data-tag="<%= tag.id %>">
-            <%= tag.name %>
-            </div>
+          <% if @tags %>
+            <% @tags.each do |tag| %>
+              <% thisTag = tag.decorate %>
+              <div class="tags tag-color-<%= tag.color.name %> size<%= thisTag.createSize(@maxLength) %>" data-tag="<%= tag.id %>" draggable="true" 
+              ondragstart="evdragstart(event,this)">
+              <%= tag.name %>
+              </div>
+            <% end %>
           <% end %>
         </div>
       </div>

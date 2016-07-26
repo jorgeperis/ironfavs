@@ -1,7 +1,5 @@
 class TagsController < ApplicationController
 
-
-
   def index
     userTags = current_user.tags
     @maxLength = Tag.biggerTag(userTags)

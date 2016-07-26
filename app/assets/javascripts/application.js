@@ -15,6 +15,36 @@
 //= require turbolinks
 //= require_tree .
 //= require bootstrap-sprockets
+function evdragstart(ev,el) {
+    ev.dataTransfer.setData("text",$(el).attr('data-tag'));
+    $(el).toggleClass('opacity');
+}
+function evdragover (ev) {
+    ev.preventDefault();
+}
+function evdrop(ev,el) {
+  ev.stopPropagation();
+  ev.preventDefault();
+  $(el).toggleClass('over');
+  var websiteid = $(el).attr('data-web');
+  var tagid = ev.dataTransfer.getData("text");
+  var tag = $("[data-tag=" + tagid + "]");
+  tag.toggleClass('opacity');
+  var relation = {
+      tag_id: tagid,
+      website_id: websiteid
+  }
+  console.log(relation);
+  $.post('/addtagtowebsite', relation);
+
+}
+function evdragenter(event,el) {
+  $(el).toggleClass('over');
+}
+
+function evdragleave(event,el) {
+  $(el).toggleClass('over');
+}
 
 $(function(){
 var CreateTag = function(){
@@ -26,17 +56,29 @@ var CreateWebsite = function(){
 
 
 
-$('.newTag').on('click', CreateTag);
-$('.newWebsite').on('click', CreateWebsite);
+$(document).on('click','.newTag', CreateTag);
+$(document).on('click','.newWebsite', CreateWebsite);
+
 $('.submitTag').on('click', function(){
   $('.js-create-tag').modal('hide');
 })
+$('.submitWebsite').on('click', function(e){
+  var a = $('#website_url').val()
+  if (a.length > 15) {
+    a = a.slice(0,13) + "..."
+  }
+  $('.js-create-website').modal('hide');
+  var mainDiv = $('<div>').addClass('website js-website');
+  var individual = $('<div>').addClass('website_individual').text(a);
+
+  var image = $('<img>').attr('src','/assets/loading.gif');
+  individual.append(image);
+  mainDiv.append(individual);
+  $('.col-sm-8').append(mainDiv);
+})
 
 
 
 
 
 })
-
-
-// $('.js-more-results').modal('show');

@@ -5,5 +5,5 @@ Rails.application.routes.draw do
   resources :websites, only: [:show, :new, :create]
   resources :tags, only: [:show, :new, :create, :index]
   root to: 'home#index'
-
+  post '/addtagtowebsite', to: 'home#addTagToWebsite'
 end

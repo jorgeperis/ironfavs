@@ -2,8 +2,13 @@
   <li role="presentation" class="active"><a href="#">Top 8</a></li>
 </ul>
 <% @websites.each do |website| %>
-<div class="website droppable" data-web=<%= website.id %>>
-  <div class="website_individual">
+<div class="website" >
+  <div class="website_individual" data-web="<%= website.id %>"
+    ondragover="evdragover(event)"
+    ondrop="evdrop(event,this)"
+    ondragenter="evdragenter(event,this)"
+    ondragleave="evdragleave(event,this)">
+
     <% if website.name.length > 15 %>
     <% website.name = website.name[0..12] + "..." %>
     <% end %>
@@ -11,8 +16,8 @@
     <%= image_tag website.avatar.url(:medium) %>
     <div class="tagscontainer">
       <% website.tags.each do |tag| %>
-      <div class="color<%= tag.color.id %> tags size0" >
-        <%= tag.name %>
+        <div class="tags tag-color-<%= tag.color.name %> size0" mini-tag="<%= tag.id %>" draggable="true" >
+      <%= tag.name %>
       </div>
       <% end %>
     </div>
