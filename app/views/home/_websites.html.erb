@@ -1,0 +1,32 @@
+<% @websites.each do |website| %>
+<div class="website" >
+  <div class="website_individual" data-web="<%= website.id %>"
+    ondragover="evdragoverwebsite(event)"
+    ondrop="evdropwebsite(event,this)"
+    ondragenter="evdragenterwebsite(event,this)"
+    ondragleave="evdragleavewebsite(event,this)">
+    <% if website.name.length > 15 %>
+      <% website.name = website.name[0..12] + "..." %>
+    <% end %>
+    <span data-edit-web-name="<%= website.id %>"><%= website.name %></span>
+    <div class="delete-website optionswebsites" data-delete-web="<%= website.id %>">
+      <%= image_tag 'delete.png' %>
+    </div>
+    <div class="edit-website optionswebsites" data-edit-web="<%= website.id %>" data-edit-web-name="<%= website.name %>">
+      <%= image_tag 'edit.png' %>
+    </div>
+    <div class="screenshot">
+      <a href="<%= website.url%>" target="_blank">
+        <%=image_tag website.avatar.url(:medium)%>
+      </a>
+    </div>
+    <div class="tagscontainer">
+      <% website.tags.each do |tag| %>
+      <div class="tags tag-color-<%= tag.color.name %> size0" mini-tag="<%= tag.id %>" draggable="true" >
+        <%= tag.name %>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+<% end %>

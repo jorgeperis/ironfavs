@@ -1,11 +1,4 @@
 class WebsitesController < ApplicationController
-  def index
-    @websites = current_user.websites.all
-  end
-
-  def new
-    @website = Website.new
-  end
 
   def create
     userWebsites = current_user.websites
@@ -13,10 +6,11 @@ class WebsitesController < ApplicationController
     url = "http://#{url}" unless url=~/^https?:\/\//
     website = Website.new
     begin
-      if website.validate(userWebsites,url,website) == "Done"
+      if website.validate(userWebsites,url,website)
         redirect_to root_path
       else
-        render text: website.validate(userWebsites,url,website)
+        e = "Page already exists"
+        render text: e
       end
     rescue => e
       render text: e

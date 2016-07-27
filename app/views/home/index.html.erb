@@ -1,35 +1,17 @@
-<ul class="nav nav-tabs">
-  <li role="presentation" class="active"><a href="#">Top 8</a></li>
-</ul>
-<% @websites.each do |website| %>
-<div class="website" >
-  <div class="website_individual" data-web="<%= website.id %>"
-    ondragover="evdragover(event)"
-    ondrop="evdrop(event,this)"
-    ondragenter="evdragenter(event,this)"
-    ondragleave="evdragleave(event,this)">
-    <% if website.name.length > 15 %>
-    <% website.name = website.name[0..12] + "..." %>
-    <% end %>
-    <span data-edit-web-name="<%= website.id %>"><%= website.name %></span>
 
-    <div class="delete" data-delete-web="<%= website.id %>">
-    <%= image_tag 'delete.png' %>
-    </div>
-    <div class="edit" data-edit-web="<%= website.id %>" data-edit-web-name="<%= website.name %>">
-    <%= image_tag 'edit.png' %>
-    </div>
-
-    <a href="<%= website.url%>" target="_blank">
-      <%=image_tag website.avatar.url(:medium)%>
-    </a>
-    <div class="tagscontainer">
-      <% website.tags.each do |tag| %>
-        <div class="tags tag-color-<%= tag.color.name %> size0" mini-tag="<%= tag.id %>" draggable="true" >
-      <%= tag.name %>
+    <div class="container-fluid">
+      <div class="row">
+        <%= render :partial => 'top' %>
       </div>
-      <% end %>
+      <div class="row">
+        <div class="col-sm-2">
+        </div>
+        <div class="col-sm-8">
+          <%= render :partial => 'websites' %>
+        </div>
+        <div class="col-sm-2">
+          <%= render :partial => 'tagside' %>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
-<% end %>
+    <%= render :partial => 'modals' %>

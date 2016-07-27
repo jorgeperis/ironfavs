@@ -1,0 +1,17 @@
+<div class="delete-tag optionstags">
+  DELETE
+</div>
+<div class="edit-tag optionstags">
+  EDIT
+</div>
+<div class="tagscontainer-side">
+<% if @tags %>
+  <% @tags.each do |tag| %>
+    <% thisTag = tag.decorate %>
+    <div class="tags tag-color-<%= tag.color.name %> size<%= thisTag.createSize(@maxLength) %>" data-tag="<%= tag.id %>" draggable="true"
+    ondragstart="evdragstart(event,this)">
+    <%= tag.name %>
+    </div>
+  <% end %>
+<% end %>
+</div>

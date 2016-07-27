@@ -1,0 +1,38 @@
+<div class="modal fade js-create-tag">
+  <div class="modal-dialog">
+    <div class="modal-content" style="overflow: auto;">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span>&times;</span>
+        </button>
+        <h2 class="js-create-new-tag">Create a new Tag</h2>
+      </div>
+      <div class="modal-body">
+        <%= form_for Tag.new do |f| %>
+          <%= f.label :name %>
+          <%= f.text_field :name %>
+          <%= f.button 'Save Tag', class: 'submitTag'%>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade js-create-website">
+  <div class="modal-dialog">
+    <div class="modal-content" style="overflow: auto;">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span>&times;</span>
+        </button>
+        <h2 class="js-create-new-website">Create a new Website</h2>
+      </div>
+      <div class="modal-body">
+        <%= form_for Website.new do |f| %>
+          <%= f.label :url %>
+          <%= f.text_field :url %>
+          <%= f.button 'Save Website', class: 'submitWebsite'%>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

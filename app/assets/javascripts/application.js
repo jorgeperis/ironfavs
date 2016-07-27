@@ -19,10 +19,10 @@ function evdragstart(ev,el) {
     ev.dataTransfer.setData("text",$(el).attr('data-tag'));
     $(el).toggleClass('opacity');
 }
-function evdragover (ev) {
+function evdragoverwebsite (ev) {
     ev.preventDefault();
 }
-function evdrop(ev,el) {
+function evdropwebsite(ev,el) {
   ev.stopPropagation();
   ev.preventDefault();
   $(el).toggleClass('over');
@@ -35,73 +35,65 @@ function evdrop(ev,el) {
       website_id: websiteid
   }
   $.post('/addtagtowebsite', relation);
-
 }
-function evdragenter(event,el) {
+function evdragenterwebsite (event,el) {
   $(el).toggleClass('over');
 }
 
-function evdragleave(event,el) {
+function evdragleavewebsite (event,el) {
   $(el).toggleClass('over');
 }
 
 $(function(){
-var CreateTag = function(){
-  $('.js-create-tag').modal('show');
-}
-var CreateWebsite = function(){
-  $('.js-create-website').modal('show');
-}
-var EditWebsite = function(e){
-  var webid = $(this).attr('data-edit-web');
-  var text = $('[data-edit-web-name=' + webid + ']').attr("contentEditable", true).focus();
-  $(text).keydown(function(e){
-    if (e.keyCode == 13){
-      $(this).attr("contentEditable", false)
-      var updateName = { web_name: $(text).text() }
-      $.ajax({
-        type: 'PUT',
-        url: '/websites/' + webid,
-        data : updateName
-      });
-    }
-  })
-}
-
-var DeleteWebsite = function(){
-  var webid = $(this).attr('data-delete-web');
-  $.ajax({
-    type: 'DELETE',
-    url: '/websites/' + webid
-  });
-}
-
-
-$(document).on('click','.newTag', CreateTag);
-$(document).on('click','.newWebsite', CreateWebsite);
-$(document).on('click','.edit', EditWebsite);
-$(document).on('click','.delete',DeleteWebsite)
-
-$(document).on('click','.submitTag', function(){
-  $('.js-create-tag').modal('hide');
-})
-$(document).on('click','.submitWebsite', function(e){
-  var a = $('#website_url').val()
-  if (a.length > 15) {
-    a = a.slice(0,13) + "..."
+  var CreateTag = function(){
+    $('.js-create-tag').modal('show');
   }
-  $('.js-create-website').modal('hide');
-  var mainDiv = $('<div>').addClass('website js-website');
-  var individual = $('<div>').addClass('website_individual').text(a);
+  var CreateWebsite = function(){
+    $('.js-create-website').modal('show');
+  }
+  var EditWebsite = function(e){
+    var webid = $(this).attr('data-edit-web');
+    var text = $('[data-edit-web-name=' + webid + ']').attr("contentEditable", true).focus();
+    $(text).keydown(function(e){
+      if (e.keyCode == 13){
+        $(this).attr("contentEditable", false)
+        var updateName = { web_name: $(text).text() }
+        $.ajax({
+          type: 'PUT',
+          url: '/websites/' + webid,
+          data : updateName
+        });
+      }
+    })
+  }
 
-  var image = $('<img>').attr('src','/assets/loading.gif');
-  individual.append(image);
-  mainDiv.append(individual);
-  $('.col-sm-8').append(mainDiv);
-})
+  var DeleteWebsite = function(){
+    var webid = $(this).attr('data-delete-web');
+    $.ajax({
+      type: 'DELETE',
+      url: '/websites/' + webid
+    });
+  }
 
 
-
-
-
+  $(document).on('click','.newTag', CreateTag);
+  $(document).on('click','.newWebsite', CreateWebsite);
+  $(document).on('click','.edit-website', EditWebsite);
+  $(document).on('click','.delete-website',DeleteWebsite)
+  $(document).on('click','.submitTag', function(){
+    $('.js-create-tag').modal('hide');
+  })
+  $(document).on('click','.submitWebsite', function(e){
+    var a = $('#website_url').val()
+    if (a.length > 15) {
+      a = a.slice(0,13) + "..."
+    }
+    $('.js-create-website').modal('hide');
+    var mainDiv = $('<div>').addClass('website js-website');
+    var individual = $('<div>').addClass('website_individual').text(a);
+    var image = $('<img>').attr('src','/assets/loading.gif');
+    individual.append(image);
+    mainDiv.append(individual);
+    $('.col-sm-8').append(mainDiv);
+  })
 })

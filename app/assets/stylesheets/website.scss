@@ -1,25 +1,66 @@
 // Place all the styles related to the website controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-
-.over {
-  border: 2px dashed #000!important;
+.website {
+  width: 24%;
+  float: left;
+  margin: 0 0.5% 0.5% 0.5%;
 }
-.edit {
+
+.website_individual {
+ width: 100%;
+ margin: 0 auto;
+ border-radius: 5px;
+ border: 1px solid #d6d6c2;
+ padding: 5px;
+ font-size: 1.5em;
+ text-align: center;
+ overflow: auto;
+ background-color: #f5f5f0;
+ position:relative;
+}
+
+.website_individual:hover {
+ opacity: 0.7;
+ filter: alpha(opacity=70); /* For IE8 and earlier */
+ border: 1px dashed #d6d6c2;
+ .optionswebsites {
+   display:block;
+   width:1em;
+   position: absolute;
+   margin:0.25em;
+   top:0;
+ }
+ .edit-website {
+   right:1.25em;
+ }
+ .delete-website {
+   right:0;
+ }
+}
+.screenshot {
+overflow: hidden;
+width:100%;
+height:100%;
+}
+.website img {
+ width: 100%;
+}
+.screenshot img {
+  width: 100%;
+  margin: 0 0 -40% 0;
+}
+.optionswebsites {
   display: none;
   cursor: pointer;
 }
-.edit:hover {
+.optionswebsites:hover {
   opacity: 0.7;
-  filter: alpha(opacity=70); /* For IE8 and earlier */
+  filter: alpha(opacity=70);
 }
-
-.delete {
-  display: none;
-  cursor: pointer;
-}
-
-.delete:hover {
-  opacity: 0.7;
-  filter: alpha(opacity=70); /* For IE8 and earlier */
+.tagscontainer {
+  margin-top: 10px;
+  width: 100%;
+  overflow: auto;
+  height: 2.5em;
 }

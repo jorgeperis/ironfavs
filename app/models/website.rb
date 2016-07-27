@@ -23,14 +23,14 @@ class Website < ApplicationRecord
   def validate(userWebsites,url,website)
     page = mechanize(url)
     if userWebsites.find_by url: page.uri.to_s
-      "Page already exists in your database"
+      false
     else
       website.url = page.uri.to_s
       website.name = page.title
       website.avatar = File.new(getWebShot(page).path, "r")
       website.save
       userWebsites.push(website)
-      "Done"
+      true
     end
   end
 end
