@@ -82,10 +82,10 @@ $(document).on('click','.newWebsite', CreateWebsite);
 $(document).on('click','.edit', EditWebsite);
 $(document).on('click','.delete',DeleteWebsite)
 
-$('.submitTag').on('click', function(){
+$(document).on('click','.submitTag', function(){
   $('.js-create-tag').modal('hide');
 })
-$('.submitWebsite').on('click', function(e){
+$(document).on('click','.submitWebsite', function(e){
   var a = $('#website_url').val()
   if (a.length > 15) {
     a = a.slice(0,13) + "..."
