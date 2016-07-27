@@ -8,11 +8,15 @@
     ondrop="evdrop(event,this)"
     ondragenter="evdragenter(event,this)"
     ondragleave="evdragleave(event,this)">
-
     <% if website.name.length > 15 %>
     <% website.name = website.name[0..12] + "..." %>
     <% end %>
-    <%= website.name %>
+    <span data-edit-web-name="<%= website.id %>"><%= website.name %></span>
+
+    <div class="edit" data-edit-web="<%= website.id %>" data-edit-web-name="<%= website.name %>">
+    <%= image_tag 'edit.png' %>
+    </div>
+
     <%= image_tag website.avatar.url(:medium) %>
     <div class="tagscontainer">
       <% website.tags.each do |tag| %>

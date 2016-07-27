@@ -34,7 +34,6 @@ function evdrop(ev,el) {
       tag_id: tagid,
       website_id: websiteid
   }
-  console.log(relation);
   $.post('/addtagtowebsite', relation);
 
 }
@@ -53,11 +52,26 @@ var CreateTag = function(){
 var CreateWebsite = function(){
   $('.js-create-website').modal('show');
 }
-
+var EditName = function(e){
+  var webid = $(this).attr('data-edit-web');
+  var text = $('[data-edit-web-name=' + webid + ']').attr("contentEditable", true).focus();
+  $(text).keydown(function(e){
+    if (e.keyCode == 13){
+      $(this).attr("contentEditable", false)
+      var updateName = { web_name: $(text).text() }
+      $.ajax({
+        type: 'PUT',
+        url: '/websites/' + webid,
+        data : updateName
+      });
+    }
+  })
+}
 
 
 $(document).on('click','.newTag', CreateTag);
 $(document).on('click','.newWebsite', CreateWebsite);
+$(document).on('click','.edit', EditName);
 
 $('.submitTag').on('click', function(){
   $('.js-create-tag').modal('hide');

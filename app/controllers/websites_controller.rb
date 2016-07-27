@@ -22,4 +22,10 @@ class WebsitesController < ApplicationController
       render text: e
     end
   end
+
+  def update
+    website = Website.find(params[:id])
+    website.name = params[:web_name]
+    website.save
+  end
 end
