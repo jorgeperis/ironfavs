@@ -45,10 +45,18 @@
     display:block;
     width:1em;
     position: absolute;
-    margin:5px;
+    margin:0.25em;
+    top:0;
+    right:1.25em;
+  }
+  .delete {
+    display:block;
+    width:1em;
+    position: absolute;
+    margin:0.25em;
     top:0;
     right:0;
-  };
+  }
 }
 
 .website img {

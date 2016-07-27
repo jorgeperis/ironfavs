@@ -13,3 +13,13 @@
   opacity: 0.7;
   filter: alpha(opacity=70); /* For IE8 and earlier */
 }
+
+.delete {
+  display: none;
+  cursor: pointer;
+}
+
+.delete:hover {
+  opacity: 0.7;
+  filter: alpha(opacity=70); /* For IE8 and earlier */
+}

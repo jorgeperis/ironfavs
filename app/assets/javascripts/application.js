@@ -52,7 +52,7 @@ var CreateTag = function(){
 var CreateWebsite = function(){
   $('.js-create-website').modal('show');
 }
-var EditName = function(e){
+var EditWebsite = function(e){
   var webid = $(this).attr('data-edit-web');
   var text = $('[data-edit-web-name=' + webid + ']').attr("contentEditable", true).focus();
   $(text).keydown(function(e){
@@ -68,10 +68,19 @@ var EditName = function(e){
   })
 }
 
+var DeleteWebsite = function(){
+  var webid = $(this).attr('data-delete-web');
+  $.ajax({
+    type: 'DELETE',
+    url: '/websites/' + webid
+  });
+}
+
 
 $(document).on('click','.newTag', CreateTag);
 $(document).on('click','.newWebsite', CreateWebsite);
-$(document).on('click','.edit', EditName);
+$(document).on('click','.edit', EditWebsite);
+$(document).on('click','.delete',DeleteWebsite)
 
 $('.submitTag').on('click', function(){
   $('.js-create-tag').modal('hide');

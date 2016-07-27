@@ -28,4 +28,10 @@ class WebsitesController < ApplicationController
     website.name = params[:web_name]
     website.save
   end
+
+  def destroy
+    website = Website.find(params[:id])
+    website.destroy
+    redirect_to root_path
+  end
 end
