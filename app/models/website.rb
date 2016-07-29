@@ -16,14 +16,20 @@ class Website < ApplicationRecord
     mechanize.get(url)
   end
 
-  def getWebShot(page)
+  def getWebShot(mechanize_page)
     ws = Webshot::Screenshot.instance
-    ws.capture page.uri.to_s, "image.png", width: 300, height: 300, quality: 85
+    ws.capture mechanize_page.uri.to_s, "image.png", width: 300, height: 300, quality: 85
   end
 
-  def try_to_save(userWebsites,user)
+
+  def try_to_save(user,url)
+    page = mechanize(url)
+    self.url = page.uri.to_s
+    self.name = page.title
     if self.save
-      userWebsites.push(self)
+      self.avatar = File.new(getWebShot(page).path, "r")
+      self.save
+      user.websites.push(self)
     else
       existing_website = Website.find_by(url: self.url)
       UserWebsite.create(user_id: user.id,website_id: existing_website.id)
