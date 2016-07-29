@@ -16,7 +16,7 @@
 //= require_tree .
 //= require bootstrap-sprockets
 function evdragstart(ev,el) {
-    ev.dataTransfer.setData("text",$(el).attr('data-tag'));
+    ev.dataTransfer.setData("text",$(el).attr('data-user-tag'));
     $(el).toggleClass('opacity');
 }
 function evdragoverwebsite (ev) {
@@ -26,15 +26,14 @@ function evdropwebsite(ev,el) {
   ev.stopPropagation();
   ev.preventDefault();
   $(el).toggleClass('over');
-  var websiteid = $(el).attr('data-web');
-  var tagid = ev.dataTransfer.getData("text");
-  var tag = $("[data-tag=" + tagid + "]");
-  tag.toggleClass('opacity');
-  var relation = {
-      tag_id: tagid,
-      website_id: websiteid
-  }
-  $.post('/addtagtowebsite', relation);
+  var userwebsite = $(el).attr('data-web');
+  var usertag = ev.dataTransfer.getData("text");
+  $('[data-user-tag=' + usertag + ']').toggleClass('opacity');
+  $.post('/tag_websites',
+   {
+      usertag_id: usertag,
+      userwebsite_id: userwebsite
+  });
 }
 function evdragenterwebsite (event,el) {
   $(el).toggleClass('over');
@@ -52,15 +51,15 @@ $(function(){
     $('.js-create-website').modal('show');
   }
   var EditWebsite = function(e){
-    var webid = $(this).attr('data-edit-web');
-    var text = $('[data-edit-web-name=' + webid + ']').attr("contentEditable", true).focus();
+    var userwebsiteid = $(this).attr('data-edit-web');
+    var text = $('[data-edit-web-name=' + userwebsiteid + ']').attr("contentEditable", true).focus();
     $(text).keydown(function(e){
       if (e.keyCode == 13){
         $(this).attr("contentEditable", false)
         var updateName = { web_name: $(text).text() }
         $.ajax({
           type: 'PUT',
-          url: '/websites/' + webid,
+          url: '/user_websites/' + userwebsiteid,
           data : updateName
         });
       }
@@ -68,10 +67,10 @@ $(function(){
   }
 
   var DeleteWebsite = function(){
-    var webid = $(this).attr('data-delete-web');
+    var userwebsiteid = $(this).attr('data-delete-web');
     $.ajax({
       type: 'DELETE',
-      url: '/websites/' + webid
+      url: '/user_websites/' + userwebsiteid
     });
   }
 
@@ -89,11 +88,13 @@ $(function(){
       a = a.slice(0,13) + "..."
     }
     $('.js-create-website').modal('hide');
-    var mainDiv = $('<div>').addClass('website js-website');
-    var individual = $('<div>').addClass('website_individual').text(a);
+    var website_class = $('<div>').addClass('website js-website');
+    var individual_website = $('<div>').addClass('website_individual').text(a);
+    var screenshot_class = $('<div>').addClass('screenshot preview');
     var image = $('<img>').attr('src','/assets/loading.gif');
-    individual.append(image);
-    mainDiv.append(individual);
-    $('.col-sm-8').append(mainDiv);
+    screenshot_class.append(image);
+    individual_website.append(screenshot_class)
+    website_class.append(individual_website);
+    $('.col-sm-8').append(website_class);
   })
 })

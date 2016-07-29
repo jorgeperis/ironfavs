@@ -1,0 +1,2 @@
+class TagUserController < ApplicationController
+end

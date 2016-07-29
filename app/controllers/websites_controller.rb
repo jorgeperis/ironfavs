@@ -1,31 +1,18 @@
 class WebsitesController < ApplicationController
-
   def create
     userWebsites = current_user.websites
     url = params[:website][:url]
     url = "http://#{url}" unless url=~/^https?:\/\//
     website = Website.new
     begin
-      if website.validate(userWebsites,url,website)
-        redirect_to root_path
-      else
-        e = "Page already exists"
-        render text: e
-      end
+      page = website.mechanize(url)
+      website.url = page.uri.to_s
+      website.name = page.title
+      website.avatar = File.new(website.getWebShot(page).path, "r")
     rescue => e
       render text: e
     end
-  end
-
-  def update
-    website = Website.find(params[:id])
-    website.name = params[:web_name]
-    website.save
-  end
-
-  def destroy
-    website = Website.find(params[:id])
-    website.destroy
+    website.try_to_save(userWebsites,current_user)
     redirect_to root_path
   end
 end

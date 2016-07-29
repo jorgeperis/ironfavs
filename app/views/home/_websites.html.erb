@@ -1,28 +1,25 @@
-<% @websites.each do |website| %>
+<% @userwebsites.each do |userwebsite| %>
 <div class="website" >
-  <div class="website_individual" data-web="<%= website.id %>"
+  <div class="website_individual" data-web="<%= userwebsite.id %>"
     ondragover="evdragoverwebsite(event)"
     ondrop="evdropwebsite(event,this)"
     ondragenter="evdragenterwebsite(event,this)"
     ondragleave="evdragleavewebsite(event,this)">
-    <% if website.name.length > 15 %>
-      <% website.name = website.name[0..12] + "..." %>
-    <% end %>
-    <span data-edit-web-name="<%= website.id %>"><%= website.name %></span>
-    <div class="delete-website optionswebsites" data-delete-web="<%= website.id %>">
+    <span class="website-name"data-edit-web-name="<%= userwebsite.id %>"><%= userwebsite.name_of_website %></span>
+    <div class="delete-website optionswebsites" data-delete-web="<%= userwebsite.id %>">
       <%= image_tag 'delete.png' %>
     </div>
-    <div class="edit-website optionswebsites" data-edit-web="<%= website.id %>" data-edit-web-name="<%= website.name %>">
+    <div class="edit-website optionswebsites" data-edit-web="<%= userwebsite.id %>">
       <%= image_tag 'edit.png' %>
     </div>
     <div class="screenshot">
-      <a href="<%= website.url%>" target="_blank">
-        <%=image_tag website.avatar.url(:medium)%>
+      <a href="<%= userwebsite.website.url%>" target="_blank">
+        <%=image_tag userwebsite.website.decorate.screenshot%>
       </a>
     </div>
     <div class="tagscontainer">
-      <% website.tags.each do |tag| %>
-      <div class="tags tag-color-<%= tag.color.name %> size0" mini-tag="<%= tag.id %>" draggable="true" >
+      <% userwebsite.website.tags.each do |tag| %>
+      <div class="tags tag-color-<%= tag.color.name %> size0" data-mini-tag="<%= tag.id %>" draggable="true" >
         <%= tag.name %>
       </div>
       <% end %>

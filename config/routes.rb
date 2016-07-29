@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.htmls
   resources :websites, only: [:create, :update, :destroy]
   resources :tags, only: [:show, :new, :create, :index]
+  resources :tag_websites, only: :create
+  resources :user_websites, only: [:update, :destroy]
+  resources :tag_users, only: [:update, :destroy]
   root to: 'home#index'
-  post '/addtagtowebsite', to: 'home#addTagToWebsite'
 end

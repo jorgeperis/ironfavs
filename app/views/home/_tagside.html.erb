@@ -5,13 +5,10 @@
   EDIT
 </div>
 <div class="tagscontainer-side">
-<% if @tags %>
-  <% @tags.each do |tag| %>
-    <% thisTag = tag.decorate %>
-    <div class="tags tag-color-<%= tag.color.name %> size<%= thisTag.createSize(@maxLength) %>" data-tag="<%= tag.id %>" draggable="true"
+  <% @usertags.each do |user_tag| %>
+    <div class="tags tag-color-<%= Color.find(user_tag.tag_color).name %> size<%= user_tag.relative_size_for_user(@max_websites_tag) %>" data-user-tag="<%= user_tag.id %>" draggable="true"
     ondragstart="evdragstart(event,this)">
-    <%= tag.name %>
+      <%= user_tag.tag.name %>
     </div>
   <% end %>
-<% end %>
 </div>
