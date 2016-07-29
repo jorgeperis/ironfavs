@@ -1,2 +1,0 @@
-class TagUserController < ApplicationController
-end

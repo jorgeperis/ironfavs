@@ -15,9 +15,37 @@
 //= require turbolinks
 //= require_tree .
 //= require bootstrap-sprockets
+function evdragovertag (ev) {
+    ev.preventDefault();
+}
+function evdroptag(ev,el) {
+  ev.stopPropagation();
+  ev.preventDefault();
+  $(el).toggleClass('over');
+  var usertag = ev.dataTransfer.getData("text");
+  $.ajax({
+    type: 'DELETE',
+    url: '/tag_users/' + usertag
+  });
+}
+function evdragentertag (event,el) {
+  $(el).toggleClass('over');
+}
+
+function evdragleavetag (event,el) {
+  $(el).toggleClass('over');
+}
+
+function evdragend(){
+  $('.delete-tag').css('visibility','hidden');
+}
+
+
+
+
 function evdragstart(ev,el) {
     ev.dataTransfer.setData("text",$(el).attr('data-user-tag'));
-    $(el).toggleClass('opacity');
+    $('.delete-tag').css('visibility','visible');
 }
 function evdragoverwebsite (ev) {
     ev.preventDefault();
@@ -28,7 +56,6 @@ function evdropwebsite(ev,el) {
   $(el).toggleClass('over');
   var userwebsite = $(el).attr('data-web');
   var usertag = ev.dataTransfer.getData("text");
-  $('[data-user-tag=' + usertag + ']').toggleClass('opacity');
   $.post('/tag_websites',
    {
       usertag_id: usertag,

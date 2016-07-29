@@ -1,10 +1,14 @@
-<div class="delete-tag optionstags">
-  DELETE
+<div class="delete-tag optionstags"
+ ondragover="evdragovertag(event)"
+ ondrop="evdroptag(event,this)"
+ ondragenter="evdragentertag(event,this)"
+ ondragleave="evdragleavetag(event,this)">
+ DELETE
 </div>
 <div class="tagscontainer-side">
   <% @usertags.each do |user_tag| %>
     <div class="tags tag-color-<%= Color.find(user_tag.tag_color).name %> size<%= user_tag.relative_size_for_user(@max_websites_tag) %>" data-user-tag="<%= user_tag.id %>" draggable="true"
-    ondragstart="evdragstart(event,this)">
+    ondragstart="evdragstart(event,this)" ondragend="evdragend()">
       <%= user_tag.tag.name %>
     </div>
   <% end %>
