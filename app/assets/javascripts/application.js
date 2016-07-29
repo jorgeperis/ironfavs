@@ -15,6 +15,41 @@
 //= require turbolinks
 //= require_tree .
 //= require bootstrap-sprockets
+function evdragoverminitag (ev) {
+    ev.preventDefault();
+}
+function evdropminitag(ev,el) {
+  ev.stopPropagation();
+  ev.preventDefault();
+  $(el).toggleClass('over');
+  var tag_website = ev.dataTransfer.getData("text");
+  $.ajax({
+    type: 'DELETE',
+    url: '/tag_websites/' + tag_website
+  });
+}
+function evdragenterminitag (event,el) {
+  $(el).toggleClass('over');
+}
+
+function evdragleaveminitag (event,el) {
+  $(el).toggleClass('over');
+}
+
+function evdragendminitag(){
+  $('.delete-mini-tag').css('display','none');
+}
+
+function evdragstartminitag(ev,el) {
+    ev.dataTransfer.setData("text",$(el).attr('data-tag-website'));
+    $(el).parent().parent().parent().children('.delete-mini-tag').css('display','block');
+}
+
+
+
+
+
+
 function evdragovertag (ev) {
     ev.preventDefault();
 }
@@ -36,14 +71,11 @@ function evdragleavetag (event,el) {
   $(el).toggleClass('over');
 }
 
-function evdragend(){
+function evdragendtag(){
   $('.delete-tag').css('visibility','hidden');
 }
 
-
-
-
-function evdragstart(ev,el) {
+function evdragstarttag(ev,el) {
     ev.dataTransfer.setData("text",$(el).attr('data-user-tag'));
     $('.delete-tag').css('visibility','visible');
 }
@@ -101,7 +133,29 @@ $(function(){
     });
   }
 
+  var ShowEditTagColors = function(){
+    $('.js-edit-tag').modal('show');
+    var idUserTag = $(this).attr('data-edit-tag');
+    var color = $(this).attr('data-user-tag-color');
+    var name = $(this).attr('data-tag-name');
+    $('[data-color=' + color + ']').css('display','none');
+    $('.js-edit-tag-title').text("Change color of " + name);
+    $('.js-user-tag-id').attr('data-user-tag-id', idUserTag);
+  }
 
+  var EditTagColor = function(){
+    $('.js-edit-tag').modal('hide');
+    $('.edit-tag-colors').css('display','block');
+    var idUserTag = $('.js-user-tag-id').attr('data-user-tag-id');
+    var newColor = $(this).attr('data-color');
+    $.ajax({
+      type: 'PUT',
+      url: '/tag_users/' + idUserTag,
+      data : {color_name: newColor}
+    });
+  }
+  $(document).on('click','.edit-tag-colors',EditTagColor);
+  $(document).on('click','.edit-tag', ShowEditTagColors);
   $(document).on('click','.newTag', CreateTag);
   $(document).on('click','.newWebsite', CreateWebsite);
   $(document).on('click','.edit-website', EditWebsite);

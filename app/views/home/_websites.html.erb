@@ -18,12 +18,25 @@
       </a>
     </div>
     <div class="tagscontainer">
-      <% userwebsite.website.tags.each do |tag| %>
-      <div class="tags tag-color-<%= tag.color.name %> size0" data-mini-tag="<%= tag.id %>" draggable="true" >
-        <%= tag.name %>
+      <% @tags_websites.where(website_id: userwebsite.website.id).each do |tag_website| %>
+      <% usertag = @userstags.find_by(tag_id: tag_website.tag_id) %>
+      <div class="tags tag-color-<%= Color.find(usertag.tag_color).name %> size0"
+          data-mini-tag="<%= tag_website.tag_id %>"
+          data-tag-website="<%= tag_website.id %>"
+          draggable="true"
+          ondragstart="evdragstartminitag(event,this)"
+          ondragend="evdragendminitag()">
+        <%= usertag.tag.name %>
       </div>
       <% end %>
     </div>
+  </div>
+  <div class="delete-mini-tag"
+   ondragover="evdragoverminitag(event)"
+   ondrop="evdropminitag(event,this)"
+   ondragenter="evdragenterminitag(event,this)"
+   ondragleave="evdragleaveminitag(event,this)">
+   UNPIN TAG
   </div>
 </div>
 <% end %>

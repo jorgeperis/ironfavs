@@ -17,4 +17,10 @@
  @import "bootstrap-sprockets";
  @import "bootstrap";
 
- 
+.modal-body {
+  padding:5px!important;
+}
+.colors-content-edit {
+  height: 100%;
+  overflow: auto;
+}

@@ -11,6 +11,29 @@
   padding:0 10px;
   cursor: move;
 }
+.side-tags {
+  position:relative;
+  overflow: auto;
+}
+.edit-tag {
+  display:none;
+  cursor: pointer;
+}
+.edit-tag img {
+  width:100%;
+}
+.tags:hover {
+  opacity: 0.7;
+  filter: alpha(opacity=70); /* For IE8 and earlier */
+  .edit-tag {
+    display:block;
+    width:0.5em;
+    position: absolute;
+    margin: -0.5em 0.15em;
+    top:0;
+    right: 0;
+  }
+}
 .opacity {
   opacity: 0.7;
   filter: alpha(opacity=70); /* For IE8 and earlier */
@@ -39,21 +62,48 @@
   font-size: 0.5em;
   line-height: 0.9em;
 }
-.optionstags {
+
+.delete-tag {
+  visibility: hidden;
   width: 100%;
   height:1.5em;
-  background-color: #f5f5f0;
+  background-color: #d9534f;
   line-height: 1.5em;
   font-size: 1.5em;
   text-align: center;
-  border: 1px solid #d6d6c2;
+  border: 1px solid #d43f3a;
   margin: 1px;
+  color: white;
 }
-.delete-tag {
-  visibility: hidden;
+.delete-mini-tag {
+  display: none;
+  width: 100%;
+  height:1.5em;
+  background-color: #d9534f;
+  line-height: 1.5em;
+  font-size: 1.5em;
+  text-align: center;
+  border: 1px solid #d43f3a;
+  margin: 1px;
+  color: white;
+  top:1.5em;
+  position:absolute;
 }
 .tagscontainer-side {
   margin: 10px 0;
+}
+.modal-body {
+  overflow: auto;
+  height: 100%;
+}
+
+.edit-tag-colors {
+  width: 24%;
+  height: 40px;
+  float: left;
+  border: 1px solid #d6d6c2;
+  margin:0.5%;
+  cursor: pointer;
 }
 .tag-color-grey {
   background: rgb(201, 201, 182); /* For browsers that do not support gradients */
@@ -62,7 +112,7 @@
   background: -moz-linear-gradient(rgb(201, 201, 182),rgba(201, 201, 182,0.8)); /* For Firefox 3.6 to 15 */
   background: linear-gradient(rgb(201, 201, 182),rgba(201, 201, 182,0.8)); /* Standard syntax */
 }
-.tag-color-pink {
+.tag-color-red {
   background: rgb(255, 128, 128); /* For browsers that do not support gradients */
   background: -webkit-linear-gradient(rgb(255, 128, 128), rgba(255, 128, 128,0.8)); /* For Safari 5.1 to 6.0 */
   background: -o-linear-gradient(rgb(255, 128, 128), rgba(255, 128, 128,0.8)); /* For Opera 11.1 to 12.0 */
@@ -110,4 +160,7 @@
   background: -o-linear-gradient(rgb(255, 128, 255), rgba(255, 128, 255,0.8)); /* For Opera 11.1 to 12.0 */
   background: -moz-linear-gradient(rgb(255, 128, 255), rgba(255, 128, 255,0.8)); /* For Firefox 3.6 to 15 */
   background: linear-gradient(rgb(255, 128, 255), rgba(255, 128, 255,0.8)); /* Standard syntax */
+}
+.tag-color-white {
+  background-color: white;
 }

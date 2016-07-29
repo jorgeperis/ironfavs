@@ -1,4 +1,12 @@
 class TagUsersController < ApplicationController
+
+  def update
+    tag_user = TagUser.find(params[:id])
+    tag_user.tag_color = Color.find_by(name: params[:color_name]).id
+    tag_user.save
+    redirect_to root_path
+  end
+
   def destroy
     tag_user = TagUser.find(params[:id])
     tag = tag_user.tag_id
