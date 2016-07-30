@@ -13,8 +13,14 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
-//= require_tree .
 //= require bootstrap-sprockets
+//= require_tree .
+
+
+
+
+
+
 function evdragoverminitag (ev) {
     ev.preventDefault();
 }
@@ -44,11 +50,6 @@ function evdragstartminitag(ev,el) {
     ev.dataTransfer.setData("text",$(el).attr('data-tag-website'));
     $(el).parent().parent().parent().children('.delete-mini-tag').css('display','block');
 }
-
-
-
-
-
 
 function evdragovertag (ev) {
     ev.preventDefault();
@@ -102,7 +103,9 @@ function evdragleavewebsite (event,el) {
   $(el).toggleClass('over');
 }
 
+
 $(function(){
+
   var CreateTag = function(){
     $('.js-create-tag').modal('show');
   }
@@ -154,6 +157,7 @@ $(function(){
       data : {color_name: newColor}
     });
   }
+
   $(document).on('click','.edit-tag-colors',EditTagColor);
   $(document).on('click','.edit-tag', ShowEditTagColors);
   $(document).on('click','.newTag', CreateTag);

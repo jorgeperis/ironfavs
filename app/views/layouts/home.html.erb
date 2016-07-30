@@ -9,8 +9,21 @@
   <body>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
-
+    <div class="container-fluid">
+      <div class="row">
+        <%= render :partial => 'top' %>
+      </div>
+      <div class="row">
+        <div class="col-sm-2">
+        </div>
+        <div class="col-sm-8">
           <%= yield %>
-        
+        </div>
+        <div class="col-sm-2">
+          <%= render :partial => 'tagside' %>
+        </div>
+      </div>
+    </div>
+    <%= render :partial => 'modals' %>
   </body>
 </html>

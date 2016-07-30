@@ -8,4 +8,6 @@ Rails.application.routes.draw do
   resources :user_websites, only: [:update, :destroy]
   resources :tag_users, only: [:update, :destroy]
   root to: 'home#index'
+  get '/search', to: 'home#search'
+  get '/search_by_tags/:id', to: 'home#search_by_tags'
 end

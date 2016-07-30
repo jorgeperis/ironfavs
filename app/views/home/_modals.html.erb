@@ -36,3 +36,24 @@
     </div>
   </div>
 </div>
+<div class="modal js-edit-tag" role="dialog">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="js-edit-tag-title"></h4>
+        </div>
+        <div class="modal-body">
+          <div class="colors-content-edit js-user-tag-id">
+            <% Color.all.each do |color| %>
+              <div class="edit-tag-colors tag-color-<%= color.name %>" data-color="<%= color.name %>"></div>
+            <% end %>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+
+    </div>
+  </div>

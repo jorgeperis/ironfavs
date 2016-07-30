@@ -6,7 +6,6 @@ class TagWebsitesController < ApplicationController
     tagwebsite.website_id = UserWebsite.find(params[:userwebsite_id]).website_id
     tagwebsite.user_id = current_user.id
     tagwebsite.save
-    puts tagwebsite.errors.full_messages
     redirect_to root_path
   end
 
