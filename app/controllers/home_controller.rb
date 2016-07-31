@@ -9,6 +9,7 @@ class HomeController < ApplicationController
       tagswebsites.each do |tagwebsite|
         @userwebsites.push(UserWebsite.find_by(user_id: tagwebsite.user_id,website_id: tagwebsite.website_id))
       end
+      @userwebsites = @userwebsites.uniq
       render 'index'
     else
       redirect_to root_path

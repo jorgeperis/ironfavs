@@ -1,7 +1,7 @@
 ThinkingSphinx::Index.define :user_website, :with => :real_time do
   # fields
   indexes website_name, :sortable => true
-  indexes website.url, :sortable => true
+  indexes website.url
 
 
   # attributes
