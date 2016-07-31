@@ -10,4 +10,6 @@ Rails.application.routes.draw do
   root to: 'home#index'
   get '/search', to: 'home#search'
   post '/search_by_tags', to: 'home#search_by_tags'
+  post '/search_type', to: 'home#search_type'
+
 end

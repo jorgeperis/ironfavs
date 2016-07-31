@@ -11,6 +11,7 @@
 // about supported directives.
 //
 //= require jquery
+//= require twitter/typeahead
 //= require jquery_ujs
 //= require turbolinks
 //= require bootstrap
@@ -101,6 +102,58 @@ function evdragleavewebsite (event,el) {
   $(el).toggleClass('over');
 }
 $(function(){
+
+  var substringMatcher = function(strs) {
+    return function findMatches(q, cb) {
+      var matches, substringRegex;
+      matches = [];
+      substrRegex = new RegExp(q, 'i');
+      $.each(strs, function(i, str) {
+        if (substrRegex.test(str)) {
+          matches.push({ value: str });
+        }
+      });
+      cb(matches);
+    };
+  };
+  var userwebsites = gon.userwebsites;
+  var todo = [];
+
+  var mytypehead = $('.typeahead').typeahead({
+    hint: false,
+    highlight: false,
+    minLength: 1,
+  },
+
+  {
+    name: 'userwebsites',
+    displayKey: 'value',
+    source: substringMatcher(userwebsites),
+    templates: {
+      empty: [
+        '<div class="message">',
+        'No username matches found. Enter an email instead!',
+        '</div>'
+      ].join('\n'),
+      suggestion: function(username){
+        todo.push(username.value);
+        return  '<div id="website-selection">' +
+                '<p><strong>' + username.value + '</strong></p>' +
+                '</div>' ;
+
+      }
+    }
+  });
+
+  mytypehead.on('keyup',function(e){
+    var inputText = $('.typeahead').val();
+    if (inputText !== '') {
+    $.post('/search_type',{suggestion: todo});
+    todo = [];
+  }
+  });
+
+
   $('.side-tags').removeClass('over');
 
   var CreateTag = function(){

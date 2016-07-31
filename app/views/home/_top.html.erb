@@ -4,8 +4,8 @@
 <div class="col-sm-9">
   <%= form_tag('/search', method: :get) do %>
   <p>
-    <%= text_field_tag :search, params[:search] %>
-    <%= submit_tag "Search", {class: 'btn btn-primary'} %>
+    <%= text_field_tag :query, params[:query], class: 'typeahead' %>
+    <%= submit_tag "Search", class: 'btn btn-primary ' %>
   </p>
 <% end %>
   <button type="button" class="btn btn-default newTag">New Tag</button>

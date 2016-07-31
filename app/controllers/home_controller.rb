@@ -1,11 +1,11 @@
 class HomeController < ApplicationController
   before_action :userwebsites, :only => [:index]
-  before_action :usertags, :userstags, :max_websites_tag, :tags_websites, :only => [:index, :search, :search_by_tags]
+  before_action :usertags, :userstags, :max_websites_tag, :tags_websites, :only => [:index, :search, :search_by_tags, :search_type]
 
   def search
     unless params[:search] == ''
-      @userwebsites = UserWebsite.search params[:search], :with => {:user_id => current_user.id}
-      tagswebsites = TagWebsite.search params[:search], :with => {:user_id => current_user.id}
+      @userwebsites = UserWebsite.search params[:query], :with => {:user_id => current_user.id}
+      tagswebsites = TagWebsite.search params[:query], :with => {:user_id => current_user.id}
       tagswebsites.each do |tagwebsite|
         @userwebsites.push(UserWebsite.find_by(user_id: tagwebsite.user_id,website_id: tagwebsite.website_id))
       end
@@ -26,12 +26,17 @@ class HomeController < ApplicationController
       format.js
     end
   end
-
-
+  def search_type
+    @userwebsites = UserWebsite.where(website_name: params[:suggestion]);
+    respond_to do |format|
+      format.js
+    end
+  end
   protected
 
     def userwebsites
       @userwebsites = UserWebsite.where(user_id: current_user.id).decorate
+      gon.userwebsites = UserWebsite.where(user_id: current_user.id).pluck(:website_name)
     end
     def usertags
       @usertags = TagUser.where(user_id: current_user.id).decorate
