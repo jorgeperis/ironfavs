@@ -13,17 +13,14 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
-//= require bootstrap-sprockets
+//= require bootstrap
 //= require_tree .
-
-
-
-
 
 
 function evdragoverminitag (ev) {
     ev.preventDefault();
 }
+
 function evdropminitag(ev,el) {
   ev.stopPropagation();
   ev.preventDefault();
@@ -34,6 +31,7 @@ function evdropminitag(ev,el) {
     url: '/tag_websites/' + tag_website
   });
 }
+
 function evdragenterminitag (event,el) {
   $(el).toggleClass('over');
 }
@@ -102,9 +100,8 @@ function evdragenterwebsite (event,el) {
 function evdragleavewebsite (event,el) {
   $(el).toggleClass('over');
 }
-
-
 $(function(){
+  $('.side-tags').removeClass('over');
 
   var CreateTag = function(){
     $('.js-create-tag').modal('show');
@@ -158,6 +155,21 @@ $(function(){
     });
   }
 
+  var SearchByTags = function(){
+    $(this).addClass('over');
+    var userTagId = $(this).attr('data-user-tag');
+    var userWebsitesIds = [];
+    $('.website_individual').each(function(){
+      userWebsitesIds.push(parseInt($(this).attr('data-web')));
+    });
+    $.post('/search_by_tags',
+     {
+        usertagid: userTagId,
+        userwebsitesids: userWebsitesIds
+    });
+
+  }
+  $(document).on('click','.side-tags', SearchByTags);
   $(document).on('click','.edit-tag-colors',EditTagColor);
   $(document).on('click','.edit-tag', ShowEditTagColors);
   $(document).on('click','.newTag', CreateTag);
@@ -180,6 +192,6 @@ $(function(){
     screenshot_class.append(image);
     individual_website.append(screenshot_class)
     website_class.append(individual_website);
-    $('.col-sm-8').append(website_class);
+    $('.websites_dashboard').append(website_class);
   })
 })

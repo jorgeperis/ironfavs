@@ -1,10 +1,6 @@
 class HomeController < ApplicationController
-  before_filter :userwebsites, :only => [:index]
-  before_filter :usertags, :userstags, :max_websites_tag, :tags_websites, :only => [:index, :search, :search_by_tags]
-
-  def index
-  
-  end
+  before_action :userwebsites, :only => [:index]
+  before_action :usertags, :userstags, :max_websites_tag, :tags_websites, :only => [:index, :search, :search_by_tags]
 
   def search
     unless params[:search] == ''
@@ -20,14 +16,16 @@ class HomeController < ApplicationController
   end
 
   def search_by_tags
-    @userwebsites = []
-    id_tag = TagUser.find(params[:id]).tag_id.to_i
+    id_tag = TagUser.find(params[:usertagid]).tag_id.to_i
     tagwebsites = TagWebsite.where(user_id: current_user.id, tag_id: id_tag)
-    tagwebsites.each do |tagwebsite|
-      @userwebsites.push(UserWebsite.find(website_id: tagwebsite.website.id))
+    websites = UserWebsite.select(:website_id).where(id: params[:userwebsitesids])
+    selected = tagwebsites.select(:website_id).where(website_id: websites)
+    @userwebsites = UserWebsite.where(website_id: selected).decorate
+    respond_to do |format|
+      format.js
     end
-    render 'index'
   end
+
 
   protected
 

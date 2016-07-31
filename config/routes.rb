@@ -9,5 +9,5 @@ Rails.application.routes.draw do
   resources :tag_users, only: [:update, :destroy]
   root to: 'home#index'
   get '/search', to: 'home#search'
-  get '/search_by_tags/:id', to: 'home#search_by_tags'
+  post '/search_by_tags', to: 'home#search_by_tags'
 end

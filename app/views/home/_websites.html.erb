@@ -1,0 +1,44 @@
+<div class="websites_dashboard">
+  <% @userwebsites.each do |userwebsite| %>
+  <div class="website" >
+    <div class="website_individual" data-web="<%= userwebsite.id %>"
+      ondragover="evdragoverwebsite(event)"
+      ondrop="evdropwebsite(event,this)"
+      ondragenter="evdragenterwebsite(event,this)"
+      ondragleave="evdragleavewebsite(event,this)">
+      <span class="website-name"data-edit-web-name="<%= userwebsite.id %>"><%= userwebsite.decorate.name_of_website %></span>
+      <div class="delete-website optionswebsites" data-delete-web="<%= userwebsite.id %>">
+        <%= image_tag 'delete.png' %>
+      </div>
+      <div class="edit-website optionswebsites" data-edit-web="<%= userwebsite.id %>">
+        <%= image_tag 'edit.png' %>
+      </div>
+      <div class="screenshot">
+        <a href="<%= userwebsite.website.url%>" target="_blank">
+          <%=image_tag userwebsite.website.decorate.screenshot%>
+        </a>
+      </div>
+      <div class="tagscontainer">
+        <% @tags_websites.where(website_id: userwebsite.website.id).each do |tag_website| %>
+        <% usertag = @userstags.find_by(tag_id: tag_website.tag_id) %>
+        <div class="tags tag-color-<%= Color.find(usertag.tag_color).name %> size0"
+            data-mini-tag="<%= tag_website.tag_id %>"
+            data-tag-website="<%= tag_website.id %>"
+            draggable="true"
+            ondragstart="evdragstartminitag(event,this)"
+            ondragend="evdragendminitag()">
+          <%= usertag.tag.name %>
+        </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="delete-mini-tag"
+     ondragover="evdragoverminitag(event)"
+     ondrop="evdropminitag(event,this)"
+     ondragenter="evdragenterminitag(event,this)"
+     ondragleave="evdragleaveminitag(event,this)">
+     UNPIN TAG
+    </div>
+  </div>
+  <% end %>
+</div>

@@ -1,6 +1,10 @@
 // Place all the styles related to the website controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.websites_dashboard {
+  overflow: auto;
+  width: 100%;
+}
 .website {
   width: 24%;
   float: left;
