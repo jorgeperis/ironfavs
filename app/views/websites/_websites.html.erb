@@ -20,7 +20,7 @@
       </div>
       <div class="tagscontainer">
         <% @tags_websites.where(website_id: userwebsite.website.id).each do |tag_website| %>
-        <% usertag = @userstags.find_by(tag_id: tag_website.tag_id) %>
+        <% usertag = @user_tags.find_by(tag_id: tag_website.tag_id) %>
         <div class="tags tag-color-<%= Color.find(usertag.tag_color).name %> size0"
             data-mini-tag="<%= tag_website.tag_id %>"
             data-tag-website="<%= tag_website.id %>"

@@ -3,6 +3,7 @@ class TagUser < ApplicationRecord
   belongs_to :tag
   before_create :tag_color_for_user
   validates :tag_id, uniqueness: {scope: :user_id}
+  scope :for_user, ->(user) { where("user_id = ?", user.id) }
 
   def tag_color_for_user
     self.tag_color = Tag.find(self.tag_id).color_id

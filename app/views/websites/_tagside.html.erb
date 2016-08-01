@@ -6,7 +6,7 @@
  DELETE TAG
 </div>
 <div class="tagscontainer-side">
-  <% @usertags.each do |user_tag| %>
+  <% @user_tags_decorate.each do |user_tag| %>
     <div class="tags side-tags tag-color-<%= Color.find(user_tag.tag_color).name %> size<%= user_tag.relative_size_for_user(@max_websites_tag) %>" data-user-tag="<%= user_tag.id %>" draggable="true"
     ondragstart="evdragstarttag(event,this)" ondragend="evdragendtag()">
       <%= user_tag.tag.name %>

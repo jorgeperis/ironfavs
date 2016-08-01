@@ -101,8 +101,11 @@ function evdragenterwebsite (event,el) {
 function evdragleavewebsite (event,el) {
   $(el).toggleClass('over');
 }
-$(function(){
 
+
+
+
+$(function(){
   var substringMatcher = function(strs) {
     return function findMatches(q, cb) {
       var matches, substringRegex;
@@ -117,8 +120,7 @@ $(function(){
     };
   };
   var userwebsites = gon.userwebsites;
-  var todo = [];
-
+  var suggested_websites = [];
   var mytypehead = $('.typeahead').typeahead({
     hint: false,
     highlight: false,
@@ -135,24 +137,32 @@ $(function(){
         'No username matches found. Enter an email instead!',
         '</div>'
       ].join('\n'),
-      suggestion: function(username){
-        todo.push(username.value);
+      suggestion: function(userwebsite){
+        suggested_websites.push(userwebsite.value);
         return  '<div id="website-selection">' +
-                '<p><strong>' + username.value + '</strong></p>' +
+                '<p><strong>' + userwebsite.value + '</strong></p>' +
                 '</div>' ;
 
       }
     }
   });
 
+  function AjaxSearcher(suggestions,tags) {
+    $.get('/websites',{
+      suggest: suggestions,
+      selectedtag: tags
+    });
+  }
+
   mytypehead.on('keyup',function(e){
     var inputText = $('.typeahead').val();
-    if (inputText !== '') {
-    $.post('/search_type',{suggestion: todo});
-    todo = [];
-  }
+    AjaxSearcher(suggested_websites,tagsId);
+
   });
 
+  mytypehead.on('keydown',function(e){
+    suggested_websites = [];
+  });
 
   $('.side-tags').removeClass('over');
 
@@ -207,20 +217,16 @@ $(function(){
       data : {color_name: newColor}
     });
   }
+var tagsId = [];
 
   var SearchByTags = function(){
-    $(this).addClass('over');
-    var userTagId = $(this).attr('data-user-tag');
-    var userWebsitesIds = [];
-    $('.website_individual').each(function(){
-      userWebsitesIds.push(parseInt($(this).attr('data-web')));
+    tagsId = [];
+    $(this).toggleClass('over');
+    var tags = $('.side-tags.over');
+    tags.each( function(i,tag){
+      tagsId.push(parseInt($(tag).attr('data-user-tag')));
     });
-    $.post('/search_by_tags',
-     {
-        usertagid: userTagId,
-        userwebsitesids: userWebsitesIds
-    });
-
+    AjaxSearcher(suggested_websites,tagsId);
   }
   $(document).on('click','.side-tags', SearchByTags);
   $(document).on('click','.edit-tag-colors',EditTagColor);

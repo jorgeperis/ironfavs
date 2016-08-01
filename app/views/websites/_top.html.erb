@@ -2,12 +2,9 @@
   My Top 8
 </div>
 <div class="col-sm-9">
-  <%= form_tag('/search', method: :get) do %>
-  <p>
-    <%= text_field_tag :query, params[:query], class: 'typeahead' %>
-    <%= submit_tag "Search", class: 'btn btn-primary ' %>
-  </p>
-<% end %>
+
+  <input type="text" name="search" placeholder="Search.." class="typeahead">
+
   <button type="button" class="btn btn-default newTag">New Tag</button>
   <button type="button" class="btn btn-default newWebsite">New Website</button>
 </div>
