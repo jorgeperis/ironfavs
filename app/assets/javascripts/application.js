@@ -133,7 +133,7 @@ $(function(){
 
   $(document).on('turbolinks:load', function() {
     var userwebsites = $('.temp_information').data('temp')
-    
+
     $('.typeahead').typeahead({
       hint: false,
       highlight: false,
@@ -227,21 +227,26 @@ $(function(){
     });
   }
 var OnClickTags = function(e) {
-  if ($(e.target).hasClass('side-tags')) {
+  // if ($(e.target).hasClass('side-tags')) {
     tagsId = [];
-    $(this).toggleClass('over');
-    var tags = $('.side-tags.over');
+    $(this).toggleClass('btn-fill');
+    var tags = $('.side-tags.btn-fill');
     tags.each( function(i,tag){
       tagsId.push(parseInt($(tag).attr('data-user-tag')));
     });
     AjaxSearcher(suggested_websites,tagsId);
-  } else {
-    EditTagColor;
-  }
+  // } else {
+  //   EditTagColor;
+  // }
 }
 
 
-
+  $(document).on('click','.enter', function(){
+    $('.js-enter-user').modal('show');
+  });
+  $(document).on('click','.register', function(){
+    $('.js-register-user').modal('show');
+  });
   $(document).on('click','.side-tags', OnClickTags);
   $(document).on('click','.edit-tag-colors',EditTagColor);
   $(document).on('click','.edit-tag', ShowEditTagColors);

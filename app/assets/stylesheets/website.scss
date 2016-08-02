@@ -2,9 +2,13 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 .websites_dashboard {
-  overflow: auto;
+  overflow-y: auto;
   width: 100%;
-}
+  height: 100%;
+  padding: 10px;
+  background-color: white;
+  border-radius: 5px;
+  }
 .website {
   width: 24%;
   float: left;
@@ -13,7 +17,7 @@
 }
 .website-name {
   font-weight: bolder;
-  font-family: 'Ubuntu';
+  font-size: 0.9em;
 }
 .website_individual {
  width: 100%;
