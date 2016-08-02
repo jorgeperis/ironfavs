@@ -132,10 +132,11 @@ $(function(){
   };
 
   $(document).on('turbolinks:load', function() {
-    var userwebsites = gon.userwebsites;
+    var userwebsites = $('.temp_information').data('temp')
+    
     $('.typeahead').typeahead({
-      hint: true,
-      highlight: true,
+      hint: false,
+      highlight: false,
       minLength: 1,
     },
     {

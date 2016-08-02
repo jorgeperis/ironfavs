@@ -55,7 +55,7 @@ protected
 
   def variables_for_view
     @tags_websites = TagWebsite.for_user(current_user)
-    gon.userwebsites = UserWebsite.for_user(current_user).pluck(:website_name)
+    @all_user_websites = UserWebsite.for_user(current_user).pluck(:website_name)
     @user_tags = current_user.tag_users
     @user_tags_decorate = @user_tags.decorate
     @max_websites_tag = current_user.max_websites_for_a_tag

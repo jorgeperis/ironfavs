@@ -1,6 +1,8 @@
 <div class="col-sm-3 logo">
-  My Top 8
+  <%= current_user.name %>
+  <%= link_to 'Logout',destroy_user_session_path, method: 'delete' %>
 </div>
+
 <div class="col-sm-9">
 
   <input type="text" name="search" placeholder="Search.." class="typeahead">

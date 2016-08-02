@@ -40,7 +40,6 @@ gem 'activemodel-serializers-xml', git: 'https://github.com/rails/activemodel-se
 gem 'draper', github: 'audionerd/draper', branch: 'rails5'
 gem 'jquery-ui-rails'
 gem 'mysql2',          '~> 0.3.18'
-gem 'gon'
 gem 'twitter-typeahead-rails'
 
 group :development, :test do

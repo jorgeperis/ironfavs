@@ -2,12 +2,13 @@
 <html>
   <head>
     <title>My Top 8</title>
-    <%= include_gon %>
     <%= csrf_meta_tags %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   <body>
+    <%= content_tag :div, class: "temp_information", data: {temp: @all_user_websites} do %>
+    <% end %>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
     <%= yield %>
