@@ -4,6 +4,7 @@ class UserWebsitesController < ApplicationController
     user_website = UserWebsite.find(params[:id])
     user_website.website_name = params[:web_name]
     user_website.save
+    redirect_to root_path
   end
 
   def destroy

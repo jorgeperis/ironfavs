@@ -102,10 +102,21 @@ function evdragleavewebsite (event,el) {
   $(el).toggleClass('over');
 }
 
+function AjaxSearcher(suggestions,tags) {
+  $.get('/websites',{
+    suggest: suggestions,
+    selectedtag: tags
+  });
+}
 
 
+
+
+var suggested_websites = [];
+var tagsId = [];
 
 $(function(){
+
   var substringMatcher = function(strs) {
     return function findMatches(q, cb) {
       var matches, substringRegex;
@@ -119,50 +130,47 @@ $(function(){
       cb(matches);
     };
   };
-  var userwebsites = gon.userwebsites;
-  var suggested_websites = [];
-  var mytypehead = $('.typeahead').typeahead({
-    hint: false,
-    highlight: false,
-    minLength: 1,
-  },
 
-  {
-    name: 'userwebsites',
-    displayKey: 'value',
-    source: substringMatcher(userwebsites),
-    templates: {
-      empty: [
-        '<div class="message">',
-        'No username matches found. Enter an email instead!',
-        '</div>'
-      ].join('\n'),
-      suggestion: function(userwebsite){
-        suggested_websites.push(userwebsite.value);
-        return  '<div id="website-selection">' +
-                '<p><strong>' + userwebsite.value + '</strong></p>' +
-                '</div>' ;
+  $(document).on('turbolinks:load', function() {
+    var userwebsites = gon.userwebsites;
+    $('.typeahead').typeahead({
+      hint: true,
+      highlight: true,
+      minLength: 1,
+    },
+    {
+      name: 'userwebsites',
+      displayKey: 'value',
+      source: substringMatcher(userwebsites),
+      templates: {
+        empty: [
+          '<div class="message">',
+          'No username matches found. Enter an email instead!',
+          '</div>'
+        ].join('\n'),
+        suggestion: function(userwebsite){
+          suggested_websites.push(userwebsite.value);
+          return  '<div id="website-selection">' +
+                  '<p><strong>' + userwebsite.value + '</strong></p>' +
+                  '</div>' ;
 
+        }
       }
-    }
-  });
-
-  function AjaxSearcher(suggestions,tags) {
-    $.get('/websites',{
-      suggest: suggestions,
-      selectedtag: tags
     });
-  }
+    $('.typeahead').on('keyup', function(e){
+      var inputText = $('.typeahead').val();
+      AjaxSearcher(suggested_websites,tagsId);
+    });
 
-  mytypehead.on('keyup',function(e){
-    var inputText = $('.typeahead').val();
-    AjaxSearcher(suggested_websites,tagsId);
+    $('.typeahead').on('keydown',function(e){
+      suggested_websites = [];
+    });
 
   });
 
-  mytypehead.on('keydown',function(e){
-    suggested_websites = [];
-  });
+
+
+
 
   $('.side-tags').removeClass('over');
 
@@ -217,9 +225,8 @@ $(function(){
       data : {color_name: newColor}
     });
   }
-var tagsId = [];
-
-  var SearchByTags = function(){
+var OnClickTags = function(e) {
+  if ($(e.target).hasClass('side-tags')) {
     tagsId = [];
     $(this).toggleClass('over');
     var tags = $('.side-tags.over');
@@ -227,8 +234,14 @@ var tagsId = [];
       tagsId.push(parseInt($(tag).attr('data-user-tag')));
     });
     AjaxSearcher(suggested_websites,tagsId);
+  } else {
+    EditTagColor;
   }
-  $(document).on('click','.side-tags', SearchByTags);
+}
+
+
+
+  $(document).on('click','.side-tags', OnClickTags);
   $(document).on('click','.edit-tag-colors',EditTagColor);
   $(document).on('click','.edit-tag', ShowEditTagColors);
   $(document).on('click','.newTag', CreateTag);
