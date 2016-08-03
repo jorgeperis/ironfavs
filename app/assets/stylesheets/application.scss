@@ -18,24 +18,72 @@
 
  @import "bootstrap-sprockets";
  @import "bootstrap";
+.landing-buttons {
+  margin-top: 40px!important;
+  width: 20%;
+  margin:auto;
+}
+ .container-lateral-buttons {
+   margin-top: 20px;
+ }
+body {
+  background: white; /* For browsers that do not support gradients */
+  background: -webkit-radial-gradient(white,rgba(102,97,91,0.1)); /* Safari 5.1 to 6.0 */
+  background: -o-radial-gradient(rgba(102,97,91,0.1), white); /* For Opera 11.6 to 12.0 */
+  background: -moz-radial-gradient(rgba(102,97,91,0.1), white); /* For Firefox 3.6 to 15 */
+  background: radial-gradient(white,rgba(102,97,91,0.1)); /* Standard syntax */
+}
+ .my-button {
+   color:white;
+   background: #EB5E28;
+   border: 1px solid #EB5E28;
+   font-family: 'Amatic SC';
+   text-align: center;
+   border-radius: 5px;
+   margin: 15px auto;
+   font-size: 1.7em;
+   line-height: 1.7em;
+   height: 1.7em;
+   font-weight: bold;
 
+
+ }
+ .my-button-sm {
+  font-size: 1.4em;
+  line-height: 1.4em;
+  height: 1.5em;
+  font-weight: bold;
+  margin-left: 5px;
+ }
+ .my-button-sm a {
+  font-size: 1em;
+  line-height: 1em;
+  height: 1.1em;
+  font-weight: bold;
+  font-family: 'Amatic SC';
+ }
+ .my-button:hover {
+   color: #66615b;
+   background-color: transparent;
+   cursor: pointer;
+ }
+.field {
+  margin-top: 10px;
+}
+.name-section {
+  font-size: 4em;
+  font-family: 'Amatic SC';
+  margin-top: -15px;
+}
  .modal-header {
    padding: 5px!important;
  }
 .js-land {
   margin:0;
 }
- .btn-user {
-   color: white!important;
-   border-color: white!important;
- }
- .btn-user:hover{
-   color: white!important;
-   border-color: #eb5e28!important;
-   background-color: #eb5e28!important;
- }
+
  .logo-landing {
-   color: white;
+   color: #66615b;
    font-size: 10em;
    margin: 0 auto;
    font-family: 'Amatic SC';
@@ -45,9 +93,21 @@
    font-size: 3em;
  }
  .btn-group {
-   margin-top:40px;
+  margin-top:40px;
   display: flex;
   justify-content: center;
+ }
+ .userlogout {
+   margin-top: 5px;
+ }
+ .user {
+   width: 40%;
+   float: left;
+ }
+ .logout {
+   width: 40%;
+   float: left;
+   font-family: 'Amatic SC'!important;
  }
  a {
    color: #66615b!important;
@@ -57,12 +117,21 @@
   margin: 100px auto;
 }
 .top {
-  font-size: 5em;
+  font-size: 6em;
   font-weight: bolder;
   font-family: 'Amatic SC';
 }
 .and {
   color:#EB5E28;
+}
+
+.modal-header {
+  border-bottom: 1px solid #EB5E28!important;
+}
+.modal-header h3 {
+  font-family: 'Amatic SC';
+  font-size:2em;
+  font-weight: bold;
 }
 .modal-body {
   padding:5px!important;

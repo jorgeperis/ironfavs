@@ -1,22 +1,33 @@
-<div class="delete-tag"
- ondragover="evdragovertag(event)"
- ondrop="evdroptag(event,this)"
- ondragenter="evdragentertag(event,this)"
- ondragleave="evdragleavetag(event,this)">
- DELETE TAG
+<div class="name-section">
+  Tags
 </div>
 <div class="tagscontainer-side">
   <% @user_tags_decorate.each do |user_tag| %>
-    <div class="tags side-tags btn btn-<%= Color.find(user_tag.tag_color).name %> size<%= user_tag.relative_size_for_user(@max_websites_tag) %>" data-user-tag="<%= user_tag.id %>" draggable="true"
-    ondragstart="evdragstarttag(event,this)" ondragend="evdragendtag()">
+    <div class="tags side-tags btn btn-<%= Color.find(user_tag.tag_color).name %> size<%= user_tag.relative_size_for_user(@max_websites_tag) %>"
+      data-user-tag="<%= user_tag.id %>"
+      draggable="true"
+      ondragstart="evdragstarttag(event,this)" ondragend="evdragendtag()"
+      data-user-tag-color="<%= Color.find(user_tag.tag_color).name %>"
+      data-tag-name="<%= user_tag.tag.name %>">
       <b><%= user_tag.tag.name %></b>
-      <div class="edit-tag"
-          data-edit-tag="<%= user_tag.id %>"
-          data-user-tag-color="<%= Color.find(user_tag.tag_color).name %>"
-          data-tag-name="<%= user_tag.tag.name %>">
-        <%= image_tag 'edit.png' %>
-      </div>
     </div>
 
   <% end %>
+</div>
+
+<div class="container-lateral-buttons">
+  <div class="edit-color-tag my-button option-tags"
+        ondragover="evdragovertag(event)"
+        ondrop="evdroptagcolor(event,this)"
+        ondragenter="evdragentertag(event,this)"
+        ondragleave="evdragleavetag(event,this)">
+    change color
+  </div>
+  <div class="delete-tag my-button option-tags"
+        ondragover="evdragovertag(event)"
+        ondrop="evdroptag(event,this)"
+        ondragenter="evdragentertag(event,this)"
+        ondragleave="evdragleavetag(event,this)">
+    delete
+  </div>
 </div>

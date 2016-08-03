@@ -5,10 +5,14 @@
 </div>
 
 <div class="col-sm-7">
-  <input type="text" name="search" placeholder="Search.." class="typeahead search-input">
+  <input type="text" name="search" placeholder="Search for website name..." class="typeahead search-input">
 </div>
 
 <div class="col-sm-2">
-  <%= current_user.name %>
-  <%= link_to 'Logout',destroy_user_session_path, method: 'delete' %>
+
+  <div class="userlogout">
+    <div class="user my-button my-button-sm"><%= current_user.name %></div>
+    <div class="logout my-button my-button-sm"><%= link_to 'Logout',destroy_user_session_path, method: 'delete' %></div>
+  </div>
+
 </div>

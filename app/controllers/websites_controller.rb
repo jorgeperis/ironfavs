@@ -1,7 +1,6 @@
 class WebsitesController < ApplicationController
   before_action :variables_for_view, only: :index
 
-
   def create
     url = params[:website][:url]
     url = "http://#{url}" unless url=~/^https?:\/\//

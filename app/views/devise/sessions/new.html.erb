@@ -1,8 +1,4 @@
-<style>
-body {
-  background-color: #66615b;
-}
-</style>
+
 <div class="logo-landing">
   IRON <span class="and">&</span> FAVS
 </div>
@@ -10,11 +6,18 @@ body {
   The place to organize your bookmarks
 </div>
 
-
-<div class="btn-group" role="group" aria-label="...">
+<div class="container-lateral-buttons landing-buttons">
+  <div class="enter my-button">
+    enter
+  </div>
+  <div class="register my-button">
+    register
+  </div>
+</div>
+<!-- <div class="btn-group" role="group" aria-label="...">
   <button type="button" class="enter btn btn-user">Enter</button>
   <button type="button" class="register btn btn-user">Register</button>
-</div>
+</div> -->
 
 <div class="modal fade js-enter-user">
   <div class="modal-dialog modal-sm">
@@ -45,7 +48,7 @@ body {
           <% end -%>
 
           <div class="actions">
-            <%= f.submit "Log in" %>
+            <%= f.submit "Log in", :class => 'my-button my-button-sm' %>
           </div>
         <% end %>
 
@@ -93,7 +96,7 @@ body {
           </div>
 
           <div class="actions">
-            <%= f.submit "Sign up" %>
+            <%= f.submit "Sign up", :class => 'my-button my-button-sm' %>
           </div>
         <% end %>
 

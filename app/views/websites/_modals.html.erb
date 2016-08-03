@@ -5,13 +5,13 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span>&times;</span>
         </button>
-        <h2 class="js-create-new-tag">Create a new Tag</h2>
+        <h3 class="js-create-new-tag">Create a new Tag</h3>
       </div>
       <div class="modal-body">
         <%= form_for Tag.new do |f| %>
           <%= f.label :name %>
           <%= f.text_field :name %>
-          <%= f.button 'Save Tag', class: 'submitTag'%>
+          <%= f.button 'Save Tag', class: 'submitTag my-button my-button-sm'%>
         <% end %>
       </div>
     </div>
@@ -24,24 +24,26 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span>&times;</span>
         </button>
-        <h2 class="js-create-new-website">Create a new Website</h2>
+        <h3 class="js-create-new-website">Create a new Website</h3>
       </div>
       <div class="modal-body">
         <%= form_for Website.new do |f| %>
           <%= f.label :url %>
           <%= f.text_field :url %>
-          <%= f.button 'Save Website', class: 'submitWebsite'%>
+          <%= f.button 'Save Website', class: 'submitWebsite my-button my-button-sm'%>
         <% end %>
       </div>
     </div>
   </div>
 </div>
-<div class="modal js-edit-tag" role="dialog">
+<div class="modal js-edit-tag">
     <div class="modal-dialog modal-sm">
       <div class="modal-content">
         <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="js-edit-tag-title"></h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span>&times;</span>
+          </button>
+          <h3 class="js-edit-tag-title"></h3>
         </div>
         <div class="modal-body">
           <div class="colors-content-edit js-user-tag-id">
@@ -50,10 +52,63 @@
             <% end %>
           </div>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
       </div>
 
     </div>
   </div>
+  <div class="modal js-edit-user">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span>&times;</span>
+            </button>
+            <h3>Edit <%= resource_name.to_s.humanize %></h3>
+          </div>
+          <div class="modal-body">
+            <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+              <%= devise_error_messages! %>
+
+              <div class="field">
+                <%= f.label :email %><br />
+                <%= f.email_field :email, autofocus: true %>
+              </div>
+
+              <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+                <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+              <% end %>
+
+              <div class="field">
+                <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
+                <%= f.password_field :password, autocomplete: "off" %>
+                <% if @minimum_password_length %>
+                  <br />
+                  <em><%= @minimum_password_length %> characters minimum</em>
+                <% end %>
+              </div>
+
+              <div class="field">
+                <%= f.label :password_confirmation %><br />
+                <%= f.password_field :password_confirmation, autocomplete: "off" %>
+              </div>
+
+              <div class="field">
+                <%= f.label :current_password %><br />
+                <%= f.password_field :current_password, autocomplete: "off" %>
+              </div>
+
+              <div class="actions">
+                <%= f.submit "Update", class: 'submitWebsite my-button my-button-sm' %>
+              </div>
+            <% end %>
+
+            <br>
+
+            <p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: 'submitWebsite my-button my-button-sm' %></p>
+
+
+          </div>
+        </div>
+
+      </div>
+    </div>

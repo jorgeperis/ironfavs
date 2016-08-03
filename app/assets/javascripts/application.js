@@ -63,21 +63,34 @@ function evdroptag(ev,el) {
     url: '/tag_users/' + usertag
   });
 }
-function evdragentertag (event,el) {
+
+function evdroptagcolor (ev,el) {
+  ev.stopPropagation();
+  ev.preventDefault();
   $(el).toggleClass('over');
+  $('.js-edit-tag').modal('show');
+  var idUserTag = ev.dataTransfer.getData("text");
+  var color = $('[data-user-tag=' + idUserTag + ']').attr('data-user-tag-color');
+  var name = $('[data-user-tag=' + idUserTag + ']').attr('data-tag-name');
+  $('[data-color=' + color + ']').css('display','none');
+  $('.js-edit-tag-title').text("Change color of " + name);
+  $('.js-user-tag-id').attr('data-user-tag-id', idUserTag);
+}
+function evdragentertag (event,el) {
+  $(el).toggleClass('options-tags-hover');
 }
 
 function evdragleavetag (event,el) {
-  $(el).toggleClass('over');
+  $(el).toggleClass('options-tags-hover');
 }
 
 function evdragendtag(){
-  $('.delete-tag').css('visibility','hidden');
+  $('.option-tags').css('visibility','hidden');
 }
 
 function evdragstarttag(ev,el) {
     ev.dataTransfer.setData("text",$(el).attr('data-user-tag'));
-    $('.delete-tag').css('visibility','visible');
+    $('.option-tags').css('visibility','visible');
 }
 function evdragoverwebsite (ev) {
     ev.preventDefault();
@@ -239,8 +252,9 @@ var OnClickTags = function(e) {
   //   EditTagColor;
   // }
 }
-
-
+  $(document).on('click', '.user', function(){
+    $('.js-edit-user').modal('show');
+  })
   $(document).on('click','.enter', function(){
     $('.js-enter-user').modal('show');
   });
@@ -249,7 +263,6 @@ var OnClickTags = function(e) {
   });
   $(document).on('click','.side-tags', OnClickTags);
   $(document).on('click','.edit-tag-colors',EditTagColor);
-  $(document).on('click','.edit-tag', ShowEditTagColors);
   $(document).on('click','.newTag', CreateTag);
   $(document).on('click','.newWebsite', CreateWebsite);
   $(document).on('click','.edit-website', EditWebsite);
@@ -259,11 +272,11 @@ var OnClickTags = function(e) {
   })
   $(document).on('click','.submitWebsite', function(e){
     var a = $('#website_url').val()
-    if (a.length > 15) {
-      a = a.slice(0,13) + "..."
+    if (a.length > 25) {
+      a = a.slice(0,23) + "..."
     }
     $('.js-create-website').modal('hide');
-    var website_class = $('<div>').addClass('website js-website');
+    var website_class = $('<div>').addClass('website js-website').attr('tabindex',0);
     var individual_website = $('<div>').addClass('website_individual').text(a);
     var screenshot_class = $('<div>').addClass('screenshot preview');
     var image = $('<img>').attr('src','/assets/loading.gif');
@@ -271,5 +284,6 @@ var OnClickTags = function(e) {
     individual_website.append(screenshot_class)
     website_class.append(individual_website);
     $('.websites_dashboard').append(website_class);
+    website_class.focus();
   })
 })
