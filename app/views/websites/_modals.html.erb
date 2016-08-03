@@ -46,7 +46,7 @@
         <div class="modal-body">
           <div class="colors-content-edit js-user-tag-id">
             <% Color.all.each do |color| %>
-              <div class="edit-tag-colors tag-color-<%= color.name %>" data-color="<%= color.name %>"></div>
+              <div class="edit-tag-colors <%= color.name %>" data-color="<%= color.name %>"></div>
             <% end %>
           </div>
         </div>
