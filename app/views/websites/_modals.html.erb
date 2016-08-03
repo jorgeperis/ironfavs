@@ -1,6 +1,6 @@
 <div class="modal fade js-create-tag">
   <div class="modal-dialog">
-    <div class="modal-content" style="overflow: auto;">
+    <div class="modal-content radial-background" style="overflow: auto;">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span>&times;</span>
@@ -19,7 +19,7 @@
 </div>
 <div class="modal fade js-create-website">
   <div class="modal-dialog">
-    <div class="modal-content" style="overflow: auto;">
+    <div class="modal-content radial-background" style="overflow: auto;">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span>&times;</span>
@@ -38,7 +38,7 @@
 </div>
 <div class="modal js-edit-tag">
     <div class="modal-dialog modal-sm">
-      <div class="modal-content">
+      <div class="modal-content radial-background">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span>&times;</span>
@@ -58,7 +58,7 @@
   </div>
   <div class="modal js-edit-user">
       <div class="modal-dialog modal-sm">
-        <div class="modal-content">
+        <div class="modal-content radial-background">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span>&times;</span>
@@ -69,6 +69,10 @@
             <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
               <%= devise_error_messages! %>
 
+              <div class="field">
+                <%= f.label :name %><br />
+                <%= f.text_field :name, autofocus: true %>
+              </div>
               <div class="field">
                 <%= f.label :email %><br />
                 <%= f.email_field :email, autofocus: true %>

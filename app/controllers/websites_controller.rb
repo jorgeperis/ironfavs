@@ -6,10 +6,11 @@ class WebsitesController < ApplicationController
     url = "http://#{url}" unless url=~/^https?:\/\//
     website = Website.new
     begin
-      website.try_to_save(current_user,url)
-      redirect_to root_path
+       website.try_to_save(current_user,url)
+       redirect_to root_path
     rescue => e
-      render text: e
+      flash[:error] = e
+      redirect_to root_path
     end
   end
 

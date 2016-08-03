@@ -8,7 +8,8 @@ class TagsController < ApplicationController
       tag.try_to_save(userTags,current_user)
       redirect_to root_path
     rescue => e
-      render text: e
+      flash[:error] = e
+      redirect_to root_path
     end
   end
 end

@@ -129,7 +129,6 @@ var suggested_websites = [];
 var tagsId = [];
 
 $(function(){
-
   var substringMatcher = function(strs) {
     return function findMatches(q, cb) {
       var matches, substringRegex;

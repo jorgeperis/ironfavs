@@ -11,8 +11,6 @@ class Website < ApplicationRecord
   has_attached_file :avatar, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/:style/missing.png"
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
 
-  
-
   def mechanize(url)
     mechanize = Mechanize.new
     mechanize.get(url)
@@ -34,7 +32,7 @@ class Website < ApplicationRecord
       user.websites.push(self)
     else
       existing_website = Website.find_by(url: self.url)
-      UserWebsite.create(user_id: user.id,website_id: existing_website.id)
+      user.websites.push(existing_website)
     end
   end
 end

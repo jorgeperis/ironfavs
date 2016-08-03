@@ -18,6 +18,7 @@
 
  @import "bootstrap-sprockets";
  @import "bootstrap";
+ 
 .landing-buttons {
   margin-top: 40px!important;
   width: 20%;
@@ -26,13 +27,17 @@
  .container-lateral-buttons {
    margin-top: 20px;
  }
-body {
+ .alert {
+   color: black!important;
+ }
+.radial-background {
   background: white; /* For browsers that do not support gradients */
   background: -webkit-radial-gradient(white,rgba(102,97,91,0.1)); /* Safari 5.1 to 6.0 */
   background: -o-radial-gradient(rgba(102,97,91,0.1), white); /* For Opera 11.6 to 12.0 */
   background: -moz-radial-gradient(rgba(102,97,91,0.1), white); /* For Firefox 3.6 to 15 */
-  background: radial-gradient(white,rgba(102,97,91,0.1)); /* Standard syntax */
+  background: radial-gradient(white,rgba(102,97,91,0.2)); /* Standard syntax */
 }
+
  .my-button {
    color:white;
    background: #EB5E28;
@@ -45,8 +50,19 @@ body {
    line-height: 1.7em;
    height: 1.7em;
    font-weight: bold;
-
-
+ }
+ .my-button-invert {
+   color: #66615b;
+   background-color: transparent;
+   border: 1px solid #EB5E28;
+   font-family: 'Amatic SC';
+   text-align: center;
+   border-radius: 5px;
+   margin: 15px auto;
+   font-size: 1.7em;
+   line-height: 1.7em;
+   height: 1.7em;
+   font-weight: bold;
  }
  .my-button-sm {
   font-size: 1.4em;
@@ -135,6 +151,9 @@ body {
 }
 .modal-body {
   padding:5px!important;
+}
+.modal-content {
+  background-color: #e7e6e4;
 }
 .colors-content-edit {
   height: 100%;

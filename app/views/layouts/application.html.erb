@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>My Top 8</title>
+    <title>Iron&Favs</title>
     <%= csrf_meta_tags %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-  <body>
+  <body class ="radial-background">
     <%= content_tag :div, class: "temp_information", data: {temp: @all_user_websites} do %>
     <% end %>
-    <!-- <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p> -->
+    <% flash.each do |key, value| %>
+      <div class="alert"><%= value %></div>
+    <% end %>
     <%= yield %>
   </body>
 </html>
