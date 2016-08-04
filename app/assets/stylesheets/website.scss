@@ -9,7 +9,6 @@
   width: 100%;
   height: 600px;
   padding: 0 10px;
-  // background-color: white;
   border-radius: 5px;
   }
 .website {
@@ -27,13 +26,13 @@
  width: 100%;
  margin: 0 auto;
  border-radius: 5px;
- // border: 0.5px solid #EB5E28;
  padding: 0 5px 5px 5px;
  font-size: 1.5em;
  overflow: auto;
- // background-color: #f5f5f0;
  position:relative;
- font-family: 'Amatic SC';
+}
+.font_style {
+  font-family: 'Amatic SC';
 }
 .optionswebsites img {
   width:100%;
@@ -81,4 +80,8 @@ height:100%;
   width: 100%;
   overflow: auto;
   height: 2.5em;
+}
+#website-selection {
+  background-color: #337ab7;
+  color: white;
 }

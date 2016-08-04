@@ -81,7 +81,14 @@
   margin:0.5%;
   cursor: pointer;
 }
-
+.over {
+  opacity: 0.85;
+  filter: alpha(opacity=85); /* For IE8 and earlier */
+}
+.options-tags-hover {
+  background: #EB5E28;
+  color: white;
+}
 .default {
   background-color: #66615B;
 }

@@ -271,7 +271,7 @@ var OnClickTags = function(e) {
     }
     $('.js-create-website').modal('hide');
     var website_class = $('<div>').addClass('website js-website').attr('tabindex',0);
-    var individual_website = $('<div>').addClass('website_individual').text(a);
+    var individual_website = $('<div>').addClass('website_individual font_style').text(a);
     var screenshot_class = $('<div>').addClass('screenshot preview');
     var image = $('<img>').attr('src','/assets/loading.gif');
     if ($('.while_charge').length) {
