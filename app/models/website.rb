@@ -11,28 +11,23 @@ class Website < ApplicationRecord
   has_attached_file :avatar, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/:style/missing.png"
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
 
-  def mechanize(url)
-    mechanize = Mechanize.new
-    mechanize.get(url)
-  end
+  def self.find_or_create_by_page(url)
+    page = Mechanize.new.get(url)
 
-  def getWebShot(mechanize_page)
-    ws = Webshot::Screenshot.instance
-    ws.capture mechanize_page.uri.to_s, "image.png", width: 300, height: 300, quality: 85
-  end
-
-
-  def try_to_save(user,url)
-    page = mechanize(url)
-    self.url = page.uri.to_s
-    self.name = page.title
-    if self.save
-      self.avatar = File.new(getWebShot(page).path, "r")
-      self.save
-      user.websites.push(self)
-    else
-      existing_website = Website.find_by(url: self.url)
-      user.websites.push(existing_website)
+    find_or_initialize_by(url: page.uri.to_s) do |new_website|
+      new_website.name = page.title
+      new_website.avatar = avatar_for_page(new_website.url)
     end
+  end
+
+  private
+
+  def self.avatar_for_page(url)
+    File.new(
+      Webshot::Screenshot.
+        instance.
+        capture(url, "image.png", width: 300, height: 300, quality: 85).
+        path,
+      "r")
   end
 end

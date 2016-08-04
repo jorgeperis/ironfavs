@@ -4,14 +4,10 @@ class WebsitesController < ApplicationController
   def create
     url = params[:website][:url]
     url = "http://#{url}" unless url=~/^https?:\/\//
-    website = Website.new
-    begin
-       website.try_to_save(current_user,url)
-       redirect_to root_path
-    rescue => e
-      flash[:error] = e
-      redirect_to root_path
-    end
+
+    website = Website.find_or_create_by_page(url)
+    current_user.websites.push(website)
+    redirect_to root_path
   end
 
   def index
