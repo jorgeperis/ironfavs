@@ -4,34 +4,6 @@
 
 
 
-::-webkit-scrollbar {
-  width: 5px;
-  height: 5px;
-}
-::-webkit-scrollbar-button {
-  width: 0px;
-  height: 0px;
-}
-::-webkit-scrollbar-thumb {
-  background: transparent;
-  border: 0px none #ffffff;
-  border-radius: 50px;
-}
-::-webkit-scrollbar-thumb:active {
-  background: #000000;
-}
-::-webkit-scrollbar-track {
-  background: transparent;;
-  border: 0px none #ffffff;
-  border-radius: 50px;
-}
-::-webkit-scrollbar-track:active {
-  background: #333333;
-}
-::-webkit-scrollbar-corner {
-  background: transparent;
-}
-
 .websites_dashboard {
   overflow-y: auto;
   width: 100%;
@@ -61,6 +33,7 @@
  overflow: auto;
  // background-color: #f5f5f0;
  position:relative;
+ font-family: 'Amatic SC';
 }
 .optionswebsites img {
   width:100%;

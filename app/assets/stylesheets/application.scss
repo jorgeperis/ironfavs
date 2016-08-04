@@ -18,6 +18,34 @@
 
  @import "bootstrap-sprockets";
  @import "bootstrap";
+
+ ::-webkit-scrollbar {
+   width: 5px;
+   height: 5px;
+ }
+ ::-webkit-scrollbar-button {
+   width: 0px;
+   height: 0px;
+ }
+ ::-webkit-scrollbar-thumb {
+   background: transparent;
+   border: 0px none #ffffff;
+   border-radius: 50px;
+ }
+ ::-webkit-scrollbar-thumb:active {
+   background: #000000;
+ }
+ ::-webkit-scrollbar-track {
+   background: transparent;;
+   border: 0px none #ffffff;
+   border-radius: 50px;
+ }
+ ::-webkit-scrollbar-track:active {
+   background: #333333;
+ }
+ ::-webkit-scrollbar-corner {
+   background: transparent;
+ }
  .websites_dashboard_empty {
    font-size: 5em;
    margin-top: 40px;
@@ -144,7 +172,9 @@
 .and {
   color:#EB5E28;
 }
-
+.charge_website {
+  font-size: 0.4em!important;
+}
 .modal-header {
   border-bottom: 1px solid #EB5E28!important;
 }

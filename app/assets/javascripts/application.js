@@ -274,6 +274,10 @@ var OnClickTags = function(e) {
     var individual_website = $('<div>').addClass('website_individual').text(a);
     var screenshot_class = $('<div>').addClass('screenshot preview');
     var image = $('<img>').attr('src','/assets/loading.gif');
+    if ($('.while_charge').length) {
+      $('.while_charge').remove();
+      individual_website.addClass('charge_website');
+    }
     screenshot_class.append(image);
     individual_website.append(screenshot_class)
     website_class.append(individual_website);
