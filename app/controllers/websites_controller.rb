@@ -4,9 +4,12 @@ class WebsitesController < ApplicationController
   def create
     url = params[:website][:url]
     url = "http://#{url}" unless url=~/^https?:\/\//
-
-    website = Website.find_or_create_by_page(url)
-    current_user.websites.push(website)
+    begin
+      website = Website.find_or_create_by_page(url)
+      current_user.websites.push(website)
+    rescue => e
+      flash[:error] = e
+    end
     redirect_to root_path
   end
 
@@ -29,21 +32,29 @@ class WebsitesController < ApplicationController
     elsif suggest
       result = userwebsites.where(website_name: params[:suggest])
     elsif selectedtag
-      result = userwebsites
+      if params[:inputtext] == "" || params[:inputtext] == nil
+        result = userwebsites
+       else
+        result = []
+      end
       selectedtag.each do |usertagid|
         tag = TagUser.find(usertagid).tag
         websites_with_tag = TagWebsite.for_user(current_user).where(tag_id: tag.id).select(:website_id)
-        result = result.where(website_id: websites_with_tag)
+        result = result.where(website_id: websites_with_tag) if result != []
       end
     else
-      result = userwebsites
+      if params[:inputtext] == "" || params[:inputtext] == nil
+        result = userwebsites
+       else
+        result = []
+      end
     end
+
     @userwebsites = userwebsites.where(id: result).decorate
     respond_to do |format|
       format.js
       format.html
     end
-
   end
 
 

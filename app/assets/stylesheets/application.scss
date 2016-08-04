@@ -18,7 +18,11 @@
 
  @import "bootstrap-sprockets";
  @import "bootstrap";
- 
+ .websites_dashboard_empty {
+   font-size: 5em;
+   margin-top: 40px;
+   font-family: 'Amatic SC';
+ }
 .landing-buttons {
   margin-top: 40px!important;
   width: 20%;

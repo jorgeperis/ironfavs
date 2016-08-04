@@ -56,12 +56,14 @@ function evdragovertag (ev) {
 function evdroptag(ev,el) {
   ev.stopPropagation();
   ev.preventDefault();
-  $(el).toggleClass('over');
-  var usertag = ev.dataTransfer.getData("text");
-  $.ajax({
-    type: 'DELETE',
-    url: '/tag_users/' + usertag
-  });
+  if (confirm("Are you sure to delete this tag?") == true){
+    $(el).toggleClass('over');
+    var usertag = ev.dataTransfer.getData("text");
+    $.ajax({
+      type: 'DELETE',
+      url: '/tag_users/' + usertag
+    });
+  }
 }
 
 function evdroptagcolor (ev,el) {
@@ -115,10 +117,11 @@ function evdragleavewebsite (event,el) {
   $(el).toggleClass('over');
 }
 
-function AjaxSearcher(suggestions,tags) {
+function AjaxSearcher(suggestions,tags,inputText) {
   $.get('/websites',{
     suggest: suggestions,
-    selectedtag: tags
+    selectedtag: tags,
+    inputtext: inputText
   });
 }
 
@@ -129,6 +132,8 @@ var suggested_websites = [];
 var tagsId = [];
 
 $(function(){
+  setTimeout(function(){ $('.alert').css('display','none'); }, 1500);
+
   var substringMatcher = function(strs) {
     return function findMatches(q, cb) {
       var matches, substringRegex;
@@ -171,14 +176,12 @@ $(function(){
       }
     });
     $('.typeahead').on('keyup', function(e){
-      var inputText = $('.typeahead').val();
-      AjaxSearcher(suggested_websites,tagsId);
+      var inputText = $('[name="search"]').val();
+      AjaxSearcher(suggested_websites,tagsId,inputText);
     });
-
     $('.typeahead').on('keydown',function(e){
       suggested_websites = [];
     });
-
   });
 
 
@@ -207,14 +210,6 @@ $(function(){
         });
       }
     })
-  }
-
-  var DeleteWebsite = function(){
-    var userwebsiteid = $(this).attr('data-delete-web');
-    $.ajax({
-      type: 'DELETE',
-      url: '/user_websites/' + userwebsiteid
-    });
   }
 
   var ShowEditTagColors = function(){
@@ -246,7 +241,8 @@ var OnClickTags = function(e) {
     tags.each( function(i,tag){
       tagsId.push(parseInt($(tag).attr('data-user-tag')));
     });
-    AjaxSearcher(suggested_websites,tagsId);
+    var inputText = $('[name="search"]').val();
+    AjaxSearcher(suggested_websites,tagsId,inputText);
   // } else {
   //   EditTagColor;
   // }
@@ -265,7 +261,6 @@ var OnClickTags = function(e) {
   $(document).on('click','.newTag', CreateTag);
   $(document).on('click','.newWebsite', CreateWebsite);
   $(document).on('click','.edit-website', EditWebsite);
-  $(document).on('click','.delete-website',DeleteWebsite)
   $(document).on('click','.submitTag', function(){
     $('.js-create-tag').modal('hide');
   })

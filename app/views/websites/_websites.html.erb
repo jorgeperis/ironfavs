@@ -1,4 +1,5 @@
 
+<% unless @userwebsites.length == 0 %>
 <div class="websites_dashboard">
   <% @userwebsites.each do |userwebsite| %>
   <div class="website" >
@@ -9,7 +10,7 @@
       ondragleave="evdragleavewebsite(event,this)">
       <span class="website-name"data-edit-web-name="<%= userwebsite.id %>"><%= userwebsite.decorate.name_of_website %></span>
       <div class="delete-website optionswebsites" data-delete-web="<%= userwebsite.id %>">
-        <%= image_tag 'delete.png' %>
+        <%= link_to (image_tag 'delete.png'), "/user_websites/#{userwebsite.id}", :method => 'DELETE', data: { :confirm=>'Are you sure to delete this website?'} %>
       </div>
       <div class="edit-website optionswebsites" data-edit-web="<%= userwebsite.id %>">
         <%= image_tag 'edit.png' %>
@@ -45,3 +46,8 @@
   </div>
   <% end %>
 </div>
+<% else %>
+<div class="websites_dashboard websites_dashboard_empty">
+  <- Add a new website
+</div>
+<% end %>
