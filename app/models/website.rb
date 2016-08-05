@@ -15,7 +15,11 @@ class Website < ApplicationRecord
     page = Mechanize.new.get(url)
 
     find_or_initialize_by(url: page.uri.to_s) do |new_website|
-      new_website.name = page.title
+      if page.title
+        new_website.name = page.title
+      else
+        new_website.name = 'undefined'
+      end
       new_website.avatar = avatar_for_page(new_website.url)
     end
   end

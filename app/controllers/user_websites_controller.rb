@@ -13,5 +13,4 @@ class UserWebsitesController < ApplicationController
     userwebsite.destroy
     redirect_to root_path
   end
-
 end
