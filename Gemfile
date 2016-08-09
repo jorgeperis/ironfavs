@@ -34,7 +34,7 @@ gem 'bootstrap-sass'
 gem 'devise'
 gem 'phantomjs'
 gem 'webshot', '~> 0.0.11'
-gem "paperclip", git: "git://github.com/thoughtbot/paperclip.git"
+gem 'paperclip', :git=> 'https://github.com/thoughtbot/paperclip', :ref => '523bd46c768226893f23889079a7aa9c73b57d68'
 gem 'mechanize'
 gem 'activemodel-serializers-xml', git: 'https://github.com/rails/activemodel-serializers-xml'
 gem 'draper', github: 'audionerd/draper', branch: 'rails5'
