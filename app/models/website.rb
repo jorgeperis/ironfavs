@@ -10,9 +10,7 @@ class Website < ApplicationRecord
 
   has_attached_file :avatar, styles: { medium: "300x300>", thumb: "100x100>" }, :storage => :s3,
     :s3_credentials => "#{Rails.root}/config/aws.yml",
-    :bucket => "ironfavs",
-    
-
+    :bucket => "ironfavs"
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
 
 
