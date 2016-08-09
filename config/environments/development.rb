@@ -58,7 +58,8 @@ Rails.application.configure do
           :bucket => ENV['ironfavs'],
           :access_key_id => ENV['AKIAI52SZ5M7LDNRKAFQ'],
           :secret_access_key => ENV['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']
-          }
+        },
+      :s3_region=> 'us-west-1'
       }
 
 end
