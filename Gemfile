@@ -41,7 +41,7 @@ gem 'draper', github: 'audionerd/draper', branch: 'rails5'
 gem 'jquery-ui-rails'
 gem 'mysql2',          '~> 0.3.18'
 gem 'twitter-typeahead-rails'
-gem 'aws-sdk-v1'
+gem 'aws-sdk'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
