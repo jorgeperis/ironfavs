@@ -23,6 +23,7 @@ class Tag < ApplicationRecord
 
   def try_to_save(userTags,user)
     if self.save
+      byebug
       userTags.push(self)
     else
       existing_tag = Tag.find_by(name: self.name)
