@@ -273,7 +273,7 @@ var OnClickTags = function(e) {
     var website_class = $('<div>').addClass('website js-website').attr('tabindex',0);
     var individual_website = $('<div>').addClass('website_individual font_style').text(a);
     var screenshot_class = $('<div>').addClass('screenshot preview');
-    var image = $('<img>').attr("src",'<%= asset_path 'loading.gif' %>');
+    var image = $('<img>').attr("src","<%= asset_path 'loading.gif' %>");
     if ($('.while_charge').length) {
       $('.while_charge').remove();
       individual_website.addClass('charge_website');
