@@ -8,8 +8,12 @@ class Website < ApplicationRecord
   validates :url, :presence => true
   validates_uniqueness_of :url
 
-  has_attached_file :avatar, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/:style/missing.png"
+  has_attached_file :avatar, styles: { medium: "300x300>", thumb: "100x100>" }, :storage => :s3,
+    :s3_credentials => "#{Rails.root}/config/aws.yml",
+    :bucket => "ironfavs"
+    
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
+
 
   def self.find_or_create_by_page(url)
     page = Mechanize.new.get(url)
