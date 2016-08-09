@@ -132,7 +132,7 @@ var suggested_websites = [];
 var tagsId = [];
 
 $(function(){
-  setTimeout(function(){ $('.alert').css('display','none'); }, 1500);
+  setTimeout(function(){ $('.alert').css('display','none'); }, 5000);
 
   var substringMatcher = function(strs) {
     return function findMatches(q, cb) {
