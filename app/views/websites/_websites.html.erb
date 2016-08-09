@@ -45,11 +45,25 @@
     </div>
   </div>
   <% end %>
+  <div class="website js_website newwebsite" tabindex="0">
+    <div class="website_individual font_style">
+      <div class="screenshot preview">
+        <%= image_tag 'loading.gif' %>
+      </div>
+    </div>
+  </div>
 </div>
 <% else %>
 <div class="websites_dashboard websites_dashboard_empty">
   <div class="while_charge">
   <- Add a new website
+  </div>
+  <div class="website js_website newwebsite" tabindex="0">
+    <div class="website_individual font_style">
+      <div class='screenshot preview'>
+        <%= image_tag 'loading.gif' %>
+      </div>
+    </div>
   </div>
 </div>
 <% end %>

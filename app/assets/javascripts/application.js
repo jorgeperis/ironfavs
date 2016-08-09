@@ -270,18 +270,11 @@ var OnClickTags = function(e) {
       a = a.slice(0,23) + "..."
     }
     $('.js-create-website').modal('hide');
-    var website_class = $('<div>').addClass('website js-website').attr('tabindex',0);
-    var individual_website = $('<div>').addClass('website_individual font_style').text(a);
-    var screenshot_class = $('<div>').addClass('screenshot preview');
-    var image = $('<img>').attr("src","<%= asset_path 'loading.gif' %>");
     if ($('.while_charge').length) {
       $('.while_charge').remove();
-      individual_website.addClass('charge_website');
+      $('.website_individual').addClass('charge_website');
     }
-    screenshot_class.append(image);
-    individual_website.append(screenshot_class)
-    website_class.append(individual_website);
-    $('.websites_dashboard').append(website_class);
-    website_class.focus();
+    $('.font_style').prepend(a);
+    $('.newwebsite').css('visibility','visible');
   })
 })
