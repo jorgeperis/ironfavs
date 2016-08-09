@@ -19,7 +19,7 @@
 
 
 function evdragoverminitag (ev) {
-    ev.preventDefault()
+    ev.preventDefault();
 }
 
 function evdropminitag(ev,el) {
