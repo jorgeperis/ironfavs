@@ -88,8 +88,8 @@ Rails.application.configure do
       :storage => :s3,
       :s3_credentials => {
           :bucket => ENV['ironfavs'],
-          :access_key_id => ENV['AKIAI52SZ5M7LDNRKAFQ'],
-          :secret_access_key => ENV['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']
+          :access_key_id => ENV['AKIAJUJLFII2JR2DWIXA'],
+          :secret_access_key => ENV['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']
         }
 
       }
